@@ -239,6 +239,22 @@ body {
     line-height: 1.2;
     color: #1f2a1f;
 }
+.grade-restaurantes-novos {
+    width: 100%;
+    min-height: 150px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(31, 42, 31, 0.04);
+    border: 1px dashed rgba(31, 42, 31, 0.22);
+    border-radius: 18px;
+    padding: 2rem;
+}
+.estado-restaurantes-novos {
+    margin: 0;
+    color: rgba(31, 42, 31, 0.7);
+    font-size: 1rem;
+    text-align: center;
+}
 .botao-filtro {
     display: inline-flex;
     align-items: center;

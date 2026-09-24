@@ -29,38 +29,40 @@
       <span>Compartilhe sua história</span>
     </div>
 
-    <form class="formulario">
+    <form class="formulario" id="registerForm">
 
       <!-- COLUNA ESQUERDA -->
       <div class="coluna">
 
         <div class="campo">
           <label>Nome do restaurante</label>
-          <input type="text" placeholder="Coloque o nome aqui!" />
+          <input id="nomeRestaurante" name="nome" type="text" placeholder="Coloque o nome aqui!" required />
+        </div>
+
+        <div class="campo">
+          <label>CNPJ</label>
+          <input id="cnpj" name="cnpj" type="text" placeholder="00.000.000/0000-00" required />
         </div>
 
         <div class="campo">
           <label>Email</label>
-          <input
+          <input id="email" name="email"
             type="email"
             placeholder="Ex: emaildoestabelecimento@gmail.com"
+            required
           />
         </div>
 
         <div class="campo">
           <label>Crie uma senha</label>
-          <input type="password" placeholder="Senha..." />
+          <input id="senha" name="senha" type="password" placeholder="Senha..." required />
         </div>
 
         <div class="campo">
           <label>Localização</label>
-          <input type="text" placeholder="Endereço do restaurante" />
+          <input id="localizacao" name="endereco" type="text" placeholder="Endereço do restaurante" required />
         </div>
 
-        <div class="campo">
-          <label>Horário de funcionamento</label>
-          <input type="text" placeholder="Ex: das 11:00 às 19:00" />
-        </div>
 
       </div>
 
@@ -70,7 +72,7 @@
         <div class="campo">
           <label>Tipo de estabelecimento</label>
 
-          <select>
+          <select id="tipo" name="tipo" required>
             <option>Restaurante</option>
             <option>Doceria</option>
             <option>Bar</option>
@@ -81,13 +83,19 @@
 
         <div class="campo">
           <label>Telefone para contato</label>
-          <input type="text" placeholder="(71) 1234-5678" />
+          <input id="telefone" name="telefone" type="text" placeholder="(71) 1234-5678" required />
+        </div>
+
+        <div class="campo">
+          <label for="imagemRestaurante">Imagem do restaurante</label>
+          <input id="imagemRestaurante" name="imagem" type="file" accept="image/*" />
+          <img id="imagemPreview" class="imagem-preview" alt="Pré-visualização da imagem do restaurante" hidden />
         </div>
 
         <div class="campo">
           <label>História do seu estabelecimento</label>
 
-          <textarea
+          <textarea id="historia" name="historia" required
             placeholder="Conte sobre o seu negócio, origens, tradições, o que o torna especial..."
           ></textarea>
         </div>
@@ -96,9 +104,11 @@
 
     </form>
 
-    <button class="botao">Pronto !</button>
+    <button class="botao" id="finalizarBtn" type="submit" form="registerForm">Pronto !</button>
+    <p id="formMessage" role="status" aria-live="polite"></p>
 
   </section>
 
+  <script src="estabelecimento.js"></script>
 </body>
 </html>

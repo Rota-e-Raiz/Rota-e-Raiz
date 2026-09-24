@@ -30,3 +30,44 @@ cards.forEach(card => {
         console.log('Card clicado:', this);
     });
 });
+
+const listaRestaurantesCriados = document.getElementById('lista-restaurantes-criados');
+
+function carregarRestaurantesCriados() {
+    if (!listaRestaurantesCriados) return;
+
+    const restaurantes = JSON.parse(localStorage.getItem('rotaRaizRestaurantes') || '[]');
+    listaRestaurantesCriados.replaceChildren();
+
+    if (!restaurantes.length) {
+        const vazio = document.createElement('p');
+        vazio.className = 'lista-vazia';
+        vazio.textContent = 'Nenhum restaurante criado ainda.';
+        listaRestaurantesCriados.append(vazio);
+        return;
+    }
+
+    restaurantes.forEach((restaurante, index) => {
+        const item = document.createElement('div');
+        item.className = 'restaurante-criado';
+
+        const nome = document.createElement('strong');
+        nome.textContent = restaurante.nome;
+
+        const apagar = document.createElement('button');
+        apagar.type = 'button';
+        apagar.className = 'botao-apagar-restaurante';
+        apagar.textContent = 'Apagar';
+        apagar.addEventListener('click', () => {
+            const restaurantesAtualizados = JSON.parse(localStorage.getItem('rotaRaizRestaurantes') || '[]');
+            restaurantesAtualizados.splice(index, 1);
+            localStorage.setItem('rotaRaizRestaurantes', JSON.stringify(restaurantesAtualizados));
+            carregarRestaurantesCriados();
+        });
+
+        item.append(nome, apagar);
+        listaRestaurantesCriados.append(item);
+    });
+}
+
+carregarRestaurantesCriados();
