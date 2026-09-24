@@ -186,49 +186,28 @@ if (botaoAdicionarComentario && comentarioInput) {
     const cards = Array.from(container.querySelectorAll('.card'));
     if (!cards.length) return;
 
-    function goToIndex(index) {
-        const card = cards[index];
-        if (!card) return;
-        card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    const viewport = container.closest('.destaque-viewport');
+    let index = 0;
+    let paused = false;
+
+    function render() {
+        cards.forEach((card, cardIndex) => card.classList.toggle('active', cardIndex === index));
     }
 
-    function syncActive() {
-        const containerRect = container.getBoundingClientRect();
-        const containerCenterX = containerRect.left + containerRect.width / 2;
-
-        let bestIndex = 0;
-        let bestDistance = Infinity;
-
-        cards.forEach((card, idx) => {
-            const r = card.getBoundingClientRect();
-            const cardCenterX = r.left + r.width / 2;
-            const distance = Math.abs(cardCenterX - containerCenterX);
-            if (distance < bestDistance) {
-                bestDistance = distance;
-                bestIndex = idx;
-            }
-        });
-
-        cards.forEach((c, idx) => c.classList.toggle('active', idx === bestIndex));
+    function move(direction) {
+        index = (index + direction + cards.length) % cards.length;
+        render();
     }
 
-    let index = Math.max(0, cards.findIndex((c) => c.classList.contains('active')));
+    viewport?.addEventListener('mouseenter', () => { paused = true; });
+    viewport?.addEventListener('mouseleave', () => { paused = false; });
+    viewport?.addEventListener('focusin', () => { paused = true; });
+    viewport?.addEventListener('focusout', () => { paused = false; });
 
-    function tick() {
-        index = (index + 1) % cards.length;
-        goToIndex(index);
-    }
+    window.setInterval(() => {
+        if (!paused && document.visibilityState === 'visible') move(1);
+    }, 5000);
 
-    // recalcula card ativo quando a janela muda de tamanho
-    window.addEventListener('resize', syncActive);
-
-    container.addEventListener('scroll', () => {
-        window.clearTimeout(container.__syncTimer);
-        container.__syncTimer = window.setTimeout(syncActive, 80);
-    });
-
-    syncActive();
-
-    const intervalMs = 7000;
-    setInterval(tick, intervalMs);
+    render();
+    window.addEventListener('resize', render);
 })();
