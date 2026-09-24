@@ -162,65 +162,6 @@ cardRestaurantes.forEach(card => {
     });
 });
 
-function criarCardRestaurante(restaurante) {
-    const card = document.createElement('article');
-    const imagem = restaurante.imagem_estabelecimento || 'sabores.jpg';
-    card.className = 'card card-novo';
-
-    const quadroImagem = document.createElement('div');
-    quadroImagem.className = 'quadro-imagem-cartao';
-
-    const imagemElemento = document.createElement('img');
-    imagemElemento.className = 'imagem-cartao';
-    imagemElemento.src = imagem;
-    imagemElemento.alt = restaurante.nome_estabelecimento;
-
-    const favorito = document.createElement('button');
-    favorito.className = 'botao-favorito';
-    favorito.type = 'button';
-    favorito.setAttribute('aria-label', 'Favorito');
-    favorito.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>';
-
-    quadroImagem.append(imagemElemento, favorito);
-
-    const conteudo = document.createElement('div');
-    conteudo.className = 'conteudo-cartao';
-
-    const titulo = document.createElement('h3');
-    titulo.textContent = restaurante.nome_estabelecimento;
-
-    const descricao = document.createElement('p');
-    descricao.textContent = restaurante.historia_estabelecimento || 'Novo restaurante cadastrado na Rota & Raiz.';
-
-    conteudo.append(titulo, descricao);
-    card.append(quadroImagem, conteudo);
-
-    favorito.addEventListener('click', (event) => event.stopPropagation());
-    card.addEventListener('click', (event) => {
-        if (!event.target.closest('.botao-favorito')) openDetails(card);
-    });
-
-    return card;
-}
-
-async function carregarRestaurantesNovos() {
-    if (!gradeCartoes) return;
-
-    try {
-        const response = await fetch('/api/estabelecimentos');
-        if (!response.ok) throw new Error('Falha ao carregar restaurantes.');
-
-        const restaurantes = await response.json();
-        restaurantes.forEach(restaurante => {
-            gradeCartoes.prepend(criarCardRestaurante(restaurante));
-        });
-    } catch (error) {
-        console.error(error.message);
-    }
-}
-
-carregarRestaurantesNovos();
-
 if (botaoFecharDetalhes) {
     botaoFecharDetalhes.addEventListener('click', closePanels);
 }

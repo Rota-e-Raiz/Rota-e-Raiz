@@ -3,7 +3,6 @@
 const registerForm = document.getElementById('registerForm');
 
 const nomeRestaurante = document.getElementById('nomeRestaurante');
-const cnpj = document.getElementById('cnpj');
 const email = document.getElementById('email');
 const senha = document.getElementById('senha');
 const localizacao = document.getElementById('localizacao');
@@ -20,7 +19,6 @@ const formMessage = document.getElementById('formMessage');
 
 const campos = [
     nomeRestaurante,
-    cnpj,
     email,
     senha,
     localizacao,
@@ -37,7 +35,6 @@ campos.forEach(campo => {
 function validateForm() {
 
     const isNomeValid = nomeRestaurante.value.trim().length >= 3;
-    const isCnpjValid = cnpj.value.trim().length >= 11;
 
     const isEmailValid =
         email.value.includes('@') &&
@@ -65,7 +62,6 @@ function validateForm() {
 
     if (
         isNomeValid &&
-        isCnpjValid &&
         isEmailValid &&
         isSenhaValid &&
         isLocalizacaoValid &&
@@ -86,7 +82,6 @@ function validateForm() {
 
     return {
         isNomeValid,
-        isCnpjValid,
         isEmailValid,
         isSenhaValid,
         isLocalizacaoValid,
@@ -96,44 +91,3 @@ function validateForm() {
         isHistoriaValid
     };
 }
-
-registerForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const validation = validateForm();
-    if (!Object.values(validation).every(Boolean)) return;
-
-    finalizarBtn.disabled = true;
-    formMessage.textContent = 'Enviando cadastro...';
-
-    const payload = {
-        nome: nomeRestaurante.value,
-        cnpj: cnpj.value,
-        endereco: localizacao.value,
-        telefone: telefone.value,
-        email: email.value,
-        senha: senha.value,
-        horario: funcionamento.value,
-        tipo: tipo.value,
-        historia: historia.value
-    };
-
-    try {
-        const response = await fetch('/api/estabelecimentos', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-        const result = await response.json();
-
-        if (!response.ok) throw new Error(result.error || 'Erro ao cadastrar restaurante.');
-
-        formMessage.textContent = 'Restaurante cadastrado com sucesso!';
-        registerForm.reset();
-    } catch (error) {
-        formMessage.textContent = error.message;
-        finalizarBtn.disabled = false;
-    }
-});
-
-validateForm();
