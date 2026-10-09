@@ -15,132 +15,134 @@ body {
 
 /* ======== BARRA DE NAVEGAÇÃO ======== */
 .barra-navegacao {
-    background: linear-gradient(135deg, #1F2A1F 0%, #2d3f2d 100%);
-    padding: 1rem 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #1f2f28 0%, #223b2f 35%, #294532 100%);
+    padding: 0.6rem 0.9rem 0.8rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 999;
-    border-radius: 0 0 22px 22px;
     width: 100%;
-    min-height: 80px;
+    min-height: 90px;
+    border-bottom: 2px solid #d9d2b9;
 }
+
 .container-barra {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) minmax(280px, 520px) minmax(180px, 1fr);
     align-items: center;
-    justify-content: space-between;
-    max-width: 1400px;
-    margin: 0 auto;
-    gap: 2rem;
-    width: min(1400px, calc(100% - 4rem));
+    gap: 1rem;
+    width: 100%;
 }
+
 .logo-barra {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    color: #D9D2B9;
+    justify-content: flex-start;
+    min-width: 0;
     flex-shrink: 0;
 }
+
 .logo-icon {
     width: auto;
-    height: 75px;
-    max-width: 250px;
+    height: 54px;
+    max-width: 200px;
     object-fit: contain;
     display: block;
 }
+
 .busca-barra {
-    flex: 1;
-    max-width: 400px;
     position: relative;
-    display: flex;
-    align-items: center;
-}
-.entrada-busca {
-    width: 100%;
-    padding: 0.75rem 1.2rem;
-    border: 2px solid #D9D2B9;
-    border-radius: 25px;
-    background-color: rgba(217, 210, 185, 0.1);
-    color: #D9D2B9;
-    font-size: 0.95rem;
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.3s ease;
-}
-.entrada-busca::placeholder {
-    color: #B8AFA0;
-}
-.entrada-busca:focus {
-    outline: none;
-    background-color: rgba(217, 210, 185, 0.2);
-    border-color: #D9D2B9;
-}
-.botao-busca {
-    position: absolute;
-    right: 12px;
-    background: none;
-    border: none;
-    color: #D9D2B9;
-    cursor: pointer;
-    padding: 0.5rem;
+    width: min(100%, 520px);
+    max-width: 520px;
+    min-width: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s ease;
+    justify-self: center;
 }
-.botao-busca:hover {
-    transform: scale(1.1);
+
+.entrada-busca {
+    width: 100%;
+    padding: 0.8rem 3rem 0.8rem 1.15rem;
+    border: 2px solid #d9d2b9;
+    border-radius: 999px;
+    background-color: rgba(217, 210, 185, 0.06);
+    color: #f7f1df;
+    font-size: 0.96rem;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease;
 }
+
+.entrada-busca::placeholder {
+    color: #d9d2b9;
+}
+
+.entrada-busca:focus {
+    outline: none;
+    background-color: rgba(217, 210, 185, 0.1);
+}
+
+.botao-busca {
+    position: absolute;
+    right: 14px;
+    background: transparent;
+    border: none;
+    color: #d9d2b9;
+    cursor: pointer;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .menu-barra {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    justify-content: flex-end;
+    gap: 0.75rem;
     flex-shrink: 0;
+    justify-self: end;
 }
-.botao-menu {
-    background-color: transparent;
-    color: #D9D2B9;
-    border: 2px solid #D9D2B9;
-    padding: 0.6rem 1.2rem;
-    border-radius: 20px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Poppins', sans-serif;
-}
-.botao-menu:hover {
-    background-color: #D9D2B9;
-    color: #1F2A1F;
-}
+
+.botao-menu,
 .botao-voltar-nav,
 .botao-opcoes {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #D9D2B9;
-    border-radius: 20px;
-    padding: 0.6rem 1rem;
-    font-size: 0.95rem;
+    background: transparent;
+    border: 2px solid #d9d2b9;
+    border-radius: 26px;
+    color: #f7f1df;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
     cursor: pointer;
-    background: transparent;
-    color: #D9D2B9;
     transition: all 0.25s ease;
 }
-.botao-voltar-nav:hover,
-.botao-opcoes:hover {
-    background-color: #D9D2B9;
-    color: #1F2A1F;
+
+.botao-menu {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.92rem;
 }
+
+.botao-voltar-nav {
+    padding: 0.7rem 1.1rem;
+    font-size: 0.92rem;
+}
+
 .botao-opcoes {
     width: 46px;
+    height: 46px;
     padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.botao-opcoes i {
-    font-size: 24px;
-    color: #1F2A1F;
+
+.botao-menu:hover,
+.botao-voltar-nav:hover,
+.botao-opcoes:hover {
+    background: rgba(217, 210, 185, 0.08);
+    transform: translateY(-1px);
 }
 
 /* ======== SUBNAVEGAÇÃO ======== */
@@ -492,6 +494,14 @@ body {
     min-height: 200px;
     flex-shrink: 0;
 }
+
+.quadro-imagem-cartao.sem-imagem {
+    background: linear-gradient(135deg, #2e4737 0%, #1d2f26 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .imagem-cartao {
     width: 100%;
     height: 100%;
@@ -859,11 +869,32 @@ body {
     background: rgba(250, 240, 230, 0.14);
     transform: translateX(1px);
 }
+.bloco-preco {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
 .faixa-preco {
     width: 100%;
     accent-color: #FAF0E6;
     height: 6px;
     border-radius: 999px;
+    cursor: pointer;
+}
+
+.info-preco {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    color: #FAF0E6;
+    font-size: 0.95rem;
+}
+
+.info-preco strong {
+    font-size: 1rem;
+    font-weight: 700;
 }
 .rodape-filtro {
     padding: 1.6rem;
@@ -903,6 +934,37 @@ body {
 }
 
 /* ======== RESPONSIVO ======== */
+@media (max-width: 760px) {
+    body {
+        padding-top: 150px;
+    }
+
+    .barra-navegacao {
+        min-height: 138px;
+    }
+
+    .container-barra {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0.65rem;
+    }
+
+    .busca-barra {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 100%;
+        max-width: none;
+    }
+
+    .logo-icon {
+        height: 48px;
+        max-width: 160px;
+    }
+
+    .menu-barra {
+        gap: 0.45rem;
+    }
+}
+
 @media (max-width: 1100px) {
     .destaque-slide {
         flex-basis: calc((100% - 1rem) / 2);

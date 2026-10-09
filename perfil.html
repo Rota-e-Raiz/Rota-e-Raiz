@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Link para adicionar SVG dos ícones aqui se necessário -->
     <link rel="stylesheet" href="perfil.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Meu Perfil - Rota & Raiz</title>
@@ -12,11 +13,9 @@
 <body>
     <!-- Header -->
     <header class="header-perfil">
-        <button class="botao-voltar-perfil" onclick="window.location.href='proxima.html'">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-            </svg>
-        </button>
+        <button class="botao-voltar-perfil" onclick="window.location.href='proxima.html'"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+</svg></button>
         <div class="titulo-header-perfil">Meu perfil</div>
         <div class="logo-header-perfil">
             <img src="logo com nome PNG (2).png" alt="Rota Raiz" class="logo-perfil">
@@ -24,7 +23,6 @@
     </header>
 
     <div class="container-perfil">
-        <!-- Seção Esquerda - Perfil -->
         <aside class="secao-perfil">
             <div class="card-perfil-usuario">
                 <div class="foto-perfil">
@@ -37,9 +35,7 @@
             </div>
         </aside>
 
-        <!-- Seção Direita - Stats e Review -->
         <main class="secao-principal">
-            <!-- Cards de Estatísticas -->
             <div class="container-stats">
                 <div class="card-stat">
                     <div class="numero-stat">11</div>
@@ -47,7 +43,7 @@
                 </div>
                 <div class="card-stat">
                     <div class="numero-stat">3</div>
-                    <div class="label-stat">Restaurantes Curtidos</div>
+                    <div class="label-stat">Histórico</div>
                 </div>
                 <div class="card-stat">
                     <div class="numero-stat">2</div>
@@ -55,9 +51,11 @@
                 </div>
             </div>
 
-            <!-- Card de Review -->
             <div class="card-review">
                 <h3 class="titulo-review">Escrever uma review</h3>
+
+                <textarea class="campo-review" placeholder="Escreva sua experiência..."></textarea>
+
                 <div class="container-icones-review">
                     <button class="botao-icone-review" title="Câmera">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
@@ -65,49 +63,50 @@
                             <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5m0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
                         </svg>
                     </button>
-                    <button class="botao-icone-review" title="Olho">
+                    <button class="botao-icone-review" title="Localização">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
                             <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
                             <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                         </svg>
                     </button>
+
+                    <button class="botao-postar">Postar</button>
                 </div>
-                <button class="botao-postar">Postar</button>
             </div>
 
-            <!-- Restaurantes -->
-            <section class="cards-container">
-
-                <div class="card">
-                    <div class="card-img">
-                        <img src="CULINARIA_DE_TERREIRO-1-1.webp" alt="Culinária de Terreiro">
-                        <button class="favorito">❤</button>
-                    </div>
-                    <div class="card-content">
-                        <h3>Culinária de terreiro</h3>
-                        <p>
-                            Restaurante voltado à tradição afro-baiana, inspirado nas
-                            comidas de terreiro do candomblé, com pratos cheios de
-                            história, ancestralidade e sabores típicos da Bahia.
-                        </p>
-                    </div>
+            <section class="historico-container">
+                <div class="cabecalho-historico">
+                    <h3>Histórico de restaurantes do cliente</h3>
                 </div>
 
-                <div class="card">
-                    <div class="card-img">
-                        <img src="fulo-foto.webp" alt="Fulô">
-                        <button class="favorito">❤</button>
-                    </div>
-                    <div class="card-content">
-                        <h3>Fulô</h3>
-                        <p>
-                            Restaurante com ambiente acolhedor e proposta regional
-                            contemporânea, valorizando ingredientes nordestinos e a
-                            cultura baiana em pratos criativos.
-                        </p>
-                    </div>
-                </div>
+                <div class="lista-historico">
+                    <article class="item-historico sem-imagem">
+                        <div class="imagem-placeholder">Rota & Raiz</div>
+                        <div class="info-historico">
+                            <h4>Culinária de Terreiro</h4>
+                            <p>Última visita: 14/08</p>
+                        </div>
+                        <span class="tag-visita">Visitado</span>
+                    </article>
 
+                    <article class="item-historico sem-imagem">
+                        <div class="imagem-placeholder">Rota & Raiz</div>
+                        <div class="info-historico">
+                            <h4>Fulô</h4>
+                            <p>Última visita: 22/08</p>
+                        </div>
+                        <span class="tag-visita">Visitado</span>
+                    </article>
+
+                    <article class="item-historico">
+                        <img src="orlaimage.png" alt="Orla">
+                        <div class="info-historico">
+                            <h4>Orla</h4>
+                            <p>Última visita: 02/09</p>
+                        </div>
+                        <span class="tag-visita">Visitado</span>
+                    </article>
+                </div>
             </section>
         </main>
     </div>

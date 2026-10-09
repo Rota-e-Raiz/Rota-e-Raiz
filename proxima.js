@@ -9,6 +9,8 @@ const botaoFecharFiltro = document.getElementById('botao-fechar-filtro');
 const botaoFecharLista = document.getElementById('botao-fechar-lista');
 const botaoLimparFiltro = document.getElementById('botao-limpar-filtro');
 const botaoAplicarFiltro = document.getElementById('botao-aplicar-filtro');
+const faixaPreco = document.getElementById('faixa-preco');
+const valorPreco = document.getElementById('valor-preco');
 
 const barraDetalhes = document.getElementById('barra-detalhes');
 const botaoFecharDetalhes = document.getElementById('botao-fechar-detalhes');
@@ -21,6 +23,54 @@ const detalhesEspecialidade = document.getElementById('detalhes-especialidade');
 const botaoAdicionarComentario = document.getElementById('botao-adicionar-comentario');
 const botaoLerHistoria = document.getElementById('botao-ler-historia');
 const comentarioInput = document.getElementById('comentario-input');
+
+const dadosRestaurantes = {
+    'culinária de terreiro': {
+        endereco: 'Rua do Terreiro, 18',
+        horario: '12h às 22h',
+        especialidade: 'Culinária afro-baiana'
+    },
+    'dona mariquita': {
+        endereco: 'Av. Central, 100',
+        horario: '11h às 23h',
+        especialidade: 'Cozinha regional'
+    },
+    'paraíso tropical': {
+        endereco: 'Praça das Flores, 44',
+        horario: '18h às 00h',
+        especialidade: 'Petiscos e frutos do mar'
+    },
+    'ki-mukeka': {
+        endereco: 'Travessa da Paz, 9',
+        horario: '13h às 21h',
+        especialidade: 'Moquecas e peixes'
+    },
+    'mocotó café': {
+        endereco: 'Rua do Café, 72',
+        horario: '08h às 18h',
+        especialidade: 'Café e cozinha regional'
+    },
+    'fulô': {
+        endereco: 'Rua da Pedra, 57',
+        horario: '17h às 00h',
+        especialidade: 'Refeições contemporâneas'
+    },
+    'beira mar': {
+        endereco: 'Av. Beira-Mar, 205',
+        horario: '10h às 22h',
+        especialidade: 'Frutos do mar e praia'
+    },
+    'sabores locais': {
+        endereco: 'Rua das Pedras, 12',
+        horario: '12h às 21h',
+        especialidade: 'Sabores baianos'
+    },
+    'orla': {
+        endereco: 'Orla de Salvador, 210',
+        horario: '09h às 23h',
+        especialidade: 'Cozinha costeira'
+    }
+};
 
 function closePanels() {
     // Fecha todos os painéis laterais e oculta o overlay
@@ -38,19 +88,43 @@ function openDetails(card) {
     const titulo = card.querySelector('h3')?.textContent?.trim() || 'Restaurante';
     const descricao = card.querySelector('.conteudo-cartao p')?.textContent?.trim() || 'Descrição não disponível.';
     const imagem = card.querySelector('.imagem-cartao');
-    const imagemSrc = imagem?.getAttribute('src') || '';
+    const imagemSrc = imagem?.getAttribute('src') || 'orlaimage.png';
     const imagemAlt = imagem?.getAttribute('alt') || titulo;
+    const chaveTitulo = titulo.toLowerCase();
+    const dados = dadosRestaurantes[chaveTitulo] || {
+        endereco: 'Rua das Flores, 200',
+        horario: '12h às 22h',
+        especialidade: 'Cozinha regional'
+    };
 
     detalhesTitulo.textContent = titulo;
     detalhesDescricao.textContent = descricao;
     detalhesImagem.setAttribute('src', imagemSrc);
     detalhesImagem.setAttribute('alt', imagemAlt);
-    detalhesEndereco.textContent = 'Av. Central, 100'; // valor fixo por enquanto
-    detalhesHorario.textContent = '11h às 23h';
-    detalhesEspecialidade.textContent = titulo.includes('Beira') ? 'Frutos do mar' : 'Cozinha regional';
+    detalhesEndereco.textContent = dados.endereco;
+    detalhesHorario.textContent = dados.horario;
+    detalhesEspecialidade.textContent = dados.especialidade;
 
     barraDetalhes.classList.add('open');
     sobreposicaoFiltro.classList.add('active');
+}
+
+function bindCardDetalhes(card) {
+    if (!card || card.dataset.bindDetalhes === 'true') return;
+
+    const botaoFavoritoCard = card.querySelector('.botao-favorito');
+    if (botaoFavoritoCard) {
+        botaoFavoritoCard.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+    }
+
+    card.addEventListener('click', (event) => {
+        if (event.target.closest('.botao-favorito')) return;
+        openDetails(card);
+    });
+
+    card.dataset.bindDetalhes = 'true';
 }
 
 // Abrir filtros
@@ -76,6 +150,16 @@ document.addEventListener('keydown', (e) => {
     if (e.key === "Escape") closePanels();
 });
 
+function atualizarValorPreco() {
+    if (!faixaPreco || !valorPreco) return;
+    valorPreco.textContent = `R$ ${faixaPreco.value}`;
+}
+
+if (faixaPreco) {
+    faixaPreco.addEventListener('input', atualizarValorPreco);
+    atualizarValorPreco();
+}
+
 // ==================== LIMPAR FILTROS (CORRIGIDO) ====================
 // reseta todos os controles do painel de filtro
 botaoLimparFiltro.addEventListener('click', () => {
@@ -85,9 +169,9 @@ botaoLimparFiltro.addEventListener('click', () => {
         chk.checked = false;        // Agora desmarca todos
     });
 
-    // Reseta o range de preço
-    const precoRange = barraFiltro.querySelector('.faixa-preco');
-    if (precoRange) precoRange.value = 4;
+    // Reseta o range de preço para um valor flexível e padrão
+    if (faixaPreco) faixaPreco.value = 150;
+    atualizarValorPreco();
 
     // Reseta o seletor de filtro (se existir)
     const seletor = barraFiltro.querySelector('.seletor-filtro');
@@ -147,26 +231,14 @@ if (botaoProximoCartoes && gradeCartoes) {
     botaoProximoCartoes.addEventListener('click', () => rolarCartoes(1));
 }
 
-const cardRestaurantes = Array.from(document.querySelectorAll('#grade-restaurantes .card'));
-cardRestaurantes.forEach(card => {
-    // cada card abre o painel de detalhes ao ser clicado
-    const botaoFavoritoCard = card.querySelector('.botao-favorito');
-    if (botaoFavoritoCard) {
-        botaoFavoritoCard.addEventListener('click', (event) => {
-            event.stopPropagation();
-        });
-    }
-
-    card.addEventListener('click', (event) => {
-        if (event.target.closest('.botao-favorito')) return;
-        openDetails(card);
-    });
-});
+const cardRestaurantes = Array.from(document.querySelectorAll('#grade-restaurantes .card, #cardsContainer .card, .destaque-slide'));
+cardRestaurantes.forEach(bindCardDetalhes);
 
 function criarCardRestaurante(restaurante) {
     const card = document.createElement('article');
     const imagem = restaurante.imagem_estabelecimento || 'sabores.jpg';
     card.className = 'card card-novo';
+    card.dataset.nome = restaurante.nome_estabelecimento || 'Restaurante';
 
     const quadroImagem = document.createElement('div');
     quadroImagem.className = 'quadro-imagem-cartao';
@@ -193,13 +265,20 @@ function criarCardRestaurante(restaurante) {
     const descricao = document.createElement('p');
     descricao.textContent = restaurante.historia_estabelecimento || 'Novo restaurante cadastrado na Rota & Raiz.';
 
+    const dados = dadosRestaurantes[(restaurante.nome_estabelecimento || '').toLowerCase()] || {
+        endereco: 'Rua da Experiência, 50',
+        horario: '12h às 22h',
+        especialidade: 'Cozinha regional'
+    };
+    card.dataset.endereco = dados.endereco;
+    card.dataset.horario = dados.horario;
+    card.dataset.especialidade = dados.especialidade;
+
     conteudo.append(titulo, descricao);
     card.append(quadroImagem, conteudo);
 
     favorito.addEventListener('click', (event) => event.stopPropagation());
-    card.addEventListener('click', (event) => {
-        if (!event.target.closest('.botao-favorito')) openDetails(card);
-    });
+    bindCardDetalhes(card);
 
     return card;
 }

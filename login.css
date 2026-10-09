@@ -22,10 +22,10 @@ body {
 /* CARD */
 .container {
   width: 100%;
-  max-width: 500px;
+  max-width: 520px;
   background: rgba(42, 58, 27, 0.88);
   border-radius: 45px;
-  padding: 40px 50px;
+  padding: 40px 50px 30px;
   backdrop-filter: blur(4px);
   position: relative;
 }
@@ -33,7 +33,7 @@ body {
 /* TÍTULO */
 .titulo {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .titulo h1 {
@@ -48,11 +48,44 @@ body {
   font-weight: 300;
 }
 
+.switch-login {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(245, 241, 220, 0.3);
+  border-radius: 18px;
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.tipo-login {
+  border: none;
+  background: transparent;
+  color: #f5f1dc;
+  padding: 12px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.tipo-login.ativo {
+  background: #a1933f;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
 /* CAMPOS */
 .formulario {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 18px;
+}
+
+.formulario.ativo {
+  display: flex;
 }
 
 .campo {
@@ -97,7 +130,6 @@ input::placeholder {
   height: 55px;
 }
 
-
 .botao:hover {
   background: #324b18;
   transform: scale(1.03);
@@ -105,7 +137,7 @@ input::placeholder {
 
 /* LINKS */
 .links {
-  margin-top: 15px;
+  margin-top: 5px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -118,7 +150,8 @@ input::placeholder {
   text-decoration: underline;
 }
 
-#formMessage {
+#formMessage,
+#formMessageRestaurante {
   text-align: center;
   color: #d8ffb0;
   margin-top: 5px;
@@ -148,4 +181,14 @@ input::placeholder {
 .botao-voltar-login:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: scale(1.1);
+}
+
+@media (max-width: 520px) {
+  .container {
+    padding: 50px 25px 25px;
+  }
+
+  .titulo h1 {
+    font-size: 1.9rem;
+  }
 }

@@ -15,55 +15,82 @@
 <body>
 
   <section class="container">
-    <div class="left-side">
-      <button class="botao-voltar-login" onclick="window.location.href='proxima.html'"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-</svg></button>
+    <button class="botao-voltar-login" onclick="window.location.href='proxima.html'" aria-label="Voltar para a página inicial">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+      </svg>
+    </button>
 
-      <div class="titulo">
-        <h1>Login
-        </h1>
-        <span>Bem vindo de volta!</span>
+    <div class="titulo">
+      <h1>Login</h1>
+      <span>Bem vindo de volta!</span>
+    </div>
+
+    <div class="switch-login" aria-label="Escolha o tipo de conta">
+      <button type="button" class="tipo-login ativo" data-tipo="cliente">Cliente</button>
+      <button type="button" class="tipo-login" data-tipo="restaurante">Restaurante</button>
+    </div>
+
+    <form class="formulario form-login ativo" id="clienteLoginForm">
+      <div class="campo">
+        <label>Email</label>
+        <input type="email" id="regEmail" placeholder="Ex: seuemail@gmail.com" />
       </div>
 
-      <form class="formulario" id="registerForm">
+      <div class="campo">
+        <label>Senha</label>
+        <input type="password" id="regSenha" placeholder="Senha..." />
+      </div>
 
-        <div class="campo">
-          <label>Email</label>
-          <input
-            type="email"
-            id="regEmail"
-            placeholder="Ex: seuemail@gmail.com"
-          />
-        </div>
+      <button type="submit" class="botao" id="finalizarBtn">Entrar</button>
 
-        <div class="campo">
-          <label>Senha</label>
-          <input
-            type="password"
-            id="regSenha"
-            placeholder="Senha..."
-          />
-        </div>
+      <p id="formMessage"></p>
 
-        <button type="submit" class="botao" id="finalizarBtn">
-          Pronto!
-        </button>
+      <div class="links">
+        <a href="#">Esqueci minha senha</a>
+        <a href="pessoa.html">Não tem uma conta? Se cadastre aqui</a>
+      </div>
+    </form>
 
-        <p id="formMessage"></p>
+    <form class="formulario form-login" id="restauranteLoginForm">
+      <div class="campo">
+        <label>Email do restaurante</label>
+        <input type="email" id="restauranteEmail" placeholder="Ex: contato@seu restaurante.com" />
+      </div>
 
-        <div class="links">
-          <a href="pessoa.html">Não tem uma conta? Se cadastre aqui</a>
+      <div class="campo">
+        <label>Senha</label>
+        <input type="password" id="restauranteSenha" placeholder="Senha..." />
+      </div>
 
-          <a href="estabelecimento.html">
-            Cadastre seu restaurante
-          </a>
-        </div>
-      </form>
-    </div>
+      <button type="submit" class="botao" id="loginRestauranteBtn">Entrar</button>
 
-    </div>
+      <p id="formMessageRestaurante"></p>
+
+      <div class="links">
+        <a href="#">Esqueci minha senha</a>
+        <a href="estabelecimento.html">Cadastre seu restaurante</a>
+      </div>
+    </form>
   </section>
+
+  <script>
+    const botoesTipoLogin = document.querySelectorAll('.tipo-login');
+    const formularios = document.querySelectorAll('.form-login');
+
+    botoesTipoLogin.forEach(botao => {
+      botao.addEventListener('click', () => {
+        const tipo = botao.dataset.tipo;
+
+        botoesTipoLogin.forEach(item => item.classList.toggle('ativo', item === botao));
+        formularios.forEach(formulario => {
+          const ativo = formulario.id === `${tipo}LoginForm`;
+          formulario.classList.toggle('ativo', ativo);
+          formulario.style.display = ativo ? 'flex' : 'none';
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
