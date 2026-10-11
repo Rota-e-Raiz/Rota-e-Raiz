@@ -50,6 +50,8 @@ body {
     max-width: 200px;
     object-fit: contain;
     display: block;
+    align-items: center;
+    justify-content: center;
 }
 
 .busca-barra {
