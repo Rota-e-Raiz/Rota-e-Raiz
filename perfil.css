@@ -62,6 +62,8 @@ body {
     margin-left: auto;
     position: relative;
     z-index: 2;
+    width: auto;
+    height: 54px;
 }
 
 .logo-perfil {
