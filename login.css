@@ -10,7 +10,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #364027, #1F2A1F);
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url("orlaimage.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding: 30px;
 }
 
