@@ -25,7 +25,9 @@ body {
     z-index: 999;
     width: 100%;
     min-height: 90px;
-    border-bottom: 2px solid #d9d2b9;
+    border-bottom: 2px solid #d9d2b9;   
+    display: flex;
+    align-items: center;
 }
 
 .container-barra {
@@ -63,6 +65,8 @@ body {
     align-items: center;
     justify-content: center;
     justify-self: center;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .entrada-busca {
@@ -610,6 +614,88 @@ body {
 
 #barra-lista {
     background: #1F2A1F;
+}
+
+/* ===== ACESSIBILIDADE NA LISTA ===== */
+
+.acessibilidade-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.opcao-acessibilidade {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    color: #FAF0E6;
+    background: rgba(217, 210, 185, 0.08);
+    border: 1px solid rgba(217, 210, 185, 0.2);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.opcao-acessibilidade:hover {
+    background: rgba(217, 210, 185, 0.16);
+}
+
+.opcao-acessibilidade input {
+    width: 18px;
+    height: 18px;
+    accent-color: #D9D2B9;
+    flex-shrink: 0;
+}
+
+.opcao-acessibilidade i {
+    font-size: 1.2rem;
+}
+
+.opcao-acessibilidade:focus-within {
+    outline: 2px solid #D9D2B9;
+    outline-offset: 3px;
+}
+
+/* Alto contraste */
+body.alto-contraste {
+    background: #000;
+    color: #fff;
+}
+
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste h3,
+body.alto-contraste p {
+    color: #fff;
+}
+
+body.alto-contraste .card,
+body.alto-contraste .barra-filtro {
+    background: #000;
+    border: 1px solid #fff;
+}
+
+/* Texto ampliado */
+body.texto-ampliado {
+    font-size: 120%;
+}
+
+body.texto-ampliado button,
+body.texto-ampliado input,
+body.texto-ampliado label,
+body.texto-ampliado p {
+    font-size: 1.1em;
+}
+
+/* Redução de animações */
+body.menos-animacoes *,
+body.menos-animacoes *::before,
+body.menos-animacoes *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
 }
 
 .barra-detalhes {
