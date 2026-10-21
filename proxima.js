@@ -362,3 +362,28 @@ if (botaoAdicionarComentario && comentarioInput) {
     render();
     window.addEventListener('resize', render);
 })();
+
+const contraste = document.getElementById('contraste');
+const aumentarFonte = document.getElementById('aumentar-fonte');
+const reduzirAnimacoes = document.getElementById('reduzir-animacoes');
+
+contraste?.addEventListener('change', () => {
+    document.body.classList.toggle(
+        'alto-contraste',
+        contraste.checked
+    );
+});
+
+aumentarFonte?.addEventListener('change', () => {
+    document.body.classList.toggle(
+        'texto-ampliado',
+        aumentarFonte.checked
+    );
+});
+
+reduzirAnimacoes?.addEventListener('change', () => {
+    document.body.classList.toggle(
+        'menos-animacoes',
+        reduzirAnimacoes.checked
+    );
+});
