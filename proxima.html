@@ -15,7 +15,7 @@
     <nav class="barra-navegacao">
         <div class="container-barra">
             <div class="logo-barra">
-                <img src="logo proxima.png" alt="Rota Raiz" class="logo-icon">
+                <img src="logo perfil (1).svg" alt="Rota Raiz" class="logo-icon">
 
             </div>
 
@@ -290,7 +290,7 @@
                 <div class="bloco-preco">
                     <input type="range" min="0" max="250" step="5" value="150" class="faixa-preco" id="faixa-preco">
                     <div class="info-preco">
-                        <span>Até</span>
+                        <span>R$ 0</span>
                         <strong id="valor-preco">R$ 150</strong>
                     </div>
                 </div>
@@ -325,7 +325,33 @@
                 <label class="titulo-filtro">Ações rápidas</label>
                 <div class="lista-menu">
                     <button type="button" class="item-lista" onclick="window.location.href='perfil.html'">Sua conta</button>
-                    <button type="button" class="item-lista" onclick="window.location.href='configuracoes.html'">Configurações</button>
+                    
+<div class="grupo-filtro">
+    <label class="titulo-filtro">
+        Acessibilidade
+    </label>
+
+    <div class="lista-menu acessibilidade-menu">
+        <label class="opcao-acessibilidade">
+            <input type="checkbox" id="contraste">
+            <i class="bi bi-circle-half" aria-hidden="true"></i>
+            Alto contraste
+        </label>
+
+        <label class="opcao-acessibilidade">
+            <input type="checkbox" id="aumentar-fonte">
+            <i class="bi bi-type" aria-hidden="true"></i>
+            Aumentar tamanho do texto
+        </label>
+
+        <label class="opcao-acessibilidade">
+            <input type="checkbox" id="reduzir-animacoes">
+            <i class="bi bi-universal-access" aria-hidden="true"></i>
+            Reduzir animações
+        </label>
+    </div>
+</div>
+
                 </div>
             </div>
         </div>
