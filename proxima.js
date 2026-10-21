@@ -88,7 +88,7 @@ function openDetails(card) {
     const titulo = card.querySelector('h3')?.textContent?.trim() || 'Restaurante';
     const descricao = card.querySelector('.conteudo-cartao p')?.textContent?.trim() || 'Descrição não disponível.';
     const imagem = card.querySelector('.imagem-cartao');
-    const imagemSrc = imagem?.getAttribute('src') || 'orlaimage.png';
+    const imagemSrc = imagem?.getAttribute('src') || '';
     const imagemAlt = imagem?.getAttribute('alt') || titulo;
     const chaveTitulo = titulo.toLowerCase();
     const dados = dadosRestaurantes[chaveTitulo] || {
@@ -99,7 +99,12 @@ function openDetails(card) {
 
     detalhesTitulo.textContent = titulo;
     detalhesDescricao.textContent = descricao;
-    detalhesImagem.setAttribute('src', imagemSrc);
+    detalhesImagem.parentElement.hidden = !imagemSrc;
+    if (imagemSrc) {
+        detalhesImagem.setAttribute('src', imagemSrc);
+    } else {
+        detalhesImagem.removeAttribute('src');
+    }
     detalhesImagem.setAttribute('alt', imagemAlt);
     detalhesEndereco.textContent = dados.endereco;
     detalhesHorario.textContent = dados.horario;
@@ -236,17 +241,22 @@ cardRestaurantes.forEach(bindCardDetalhes);
 
 function criarCardRestaurante(restaurante) {
     const card = document.createElement('article');
-    const imagem = restaurante.imagem_estabelecimento || 'sabores.jpg';
+    const imagem = restaurante.imagem_estabelecimento;
     card.className = 'card card-novo';
     card.dataset.nome = restaurante.nome_estabelecimento || 'Restaurante';
 
     const quadroImagem = document.createElement('div');
     quadroImagem.className = 'quadro-imagem-cartao';
 
-    const imagemElemento = document.createElement('img');
-    imagemElemento.className = 'imagem-cartao';
-    imagemElemento.src = imagem;
-    imagemElemento.alt = restaurante.nome_estabelecimento;
+    if (imagem) {
+        const imagemElemento = document.createElement('img');
+        imagemElemento.className = 'imagem-cartao';
+        imagemElemento.src = imagem;
+        imagemElemento.alt = restaurante.nome_estabelecimento;
+        quadroImagem.append(imagemElemento);
+    } else {
+        quadroImagem.classList.add('sem-imagem');
+    }
 
     const favorito = document.createElement('button');
     favorito.className = 'botao-favorito';
@@ -254,7 +264,7 @@ function criarCardRestaurante(restaurante) {
     favorito.setAttribute('aria-label', 'Favorito');
     favorito.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>';
 
-    quadroImagem.append(imagemElemento, favorito);
+    quadroImagem.append(favorito);
 
     const conteudo = document.createElement('div');
     conteudo.className = 'conteudo-cartao';

@@ -10,12 +10,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background:
-    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-    url("pessoa.webp");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: linear-gradient(135deg, #364027, #1F2A1F);
   padding: 30px;
 }
 
