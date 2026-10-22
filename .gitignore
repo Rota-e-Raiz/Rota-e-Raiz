@@ -1,2 +1,23 @@
+# Dependências 
 node_modules/
+
+# Ambientes e Segredos
 .env
+.env.local
+.env.development
+.env.production
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ficheiros do Sistema Operativo e Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Ficheiros de Build/Compilação 
+dist/
+build/
