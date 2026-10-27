@@ -1,0 +1,301 @@
+.acessibilidade-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.opcao-acessibilidade {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    color: #FAF0E6;
+    background: rgba(217, 210, 185, 0.08);
+    border: 1px solid rgba(217, 210, 185, 0.2);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.opcao-acessibilidade:hover {
+    background: rgba(217, 210, 185, 0.16);
+}
+
+.opcao-acessibilidade input {
+    width: 18px;
+    height: 18px;
+    accent-color: #d9d2b9;
+    flex-shrink: 0;
+}
+
+.opcao-acessibilidade i {
+    font-size: 1.2rem;
+}
+
+.opcao-acessibilidade:focus-within {
+    outline: 2px solid #d9d2b9;
+    outline-offset: 3px;
+}
+
+body.alto-contraste {
+    --contraste-fundo: #14231a;
+    --contraste-superficie: #1c3024;
+    --contraste-superficie-elevada: #294233;
+    --contraste-campo: #101b15;
+    --contraste-borda: #82957b;
+    --contraste-texto: #fff4dc;
+    --contraste-destaque: #f0d47a;
+    background-color: var(--contraste-fundo) !important;
+    color: var(--contraste-texto) !important;
+}
+
+body.alto-contraste * {
+    border-color: var(--contraste-borda) !important;
+    color: var(--contraste-texto) !important;
+}
+
+body.alto-contraste :is(
+    nav,
+    header,
+    footer,
+    .card,
+    [class*="card-"],
+    [class*="cartao"],
+    .container,
+    .container-principal,
+    .container-perfil,
+    .editar-perfil,
+    .botao-gerenciar-perfil,
+    .container-stats,
+    .secao-cartoes,
+    .historico-container,
+    .lista-historico,
+    .area-configuracoes,
+    .menu-esquerdo,
+    .conteudo-configuracoes,
+    .search-container,
+    .restaurante-criado,
+    .lista-vazia,
+    .item-historico,
+    .tag-visita,
+    .imagem-placeholder,
+    .quadro-imagem-cartao,
+    .card-destaque-info,
+    .card-config,
+    .barra-filtro,
+    .barra-detalhes,
+    .container-barra,
+    .container-subnavegacao,
+    .secao-principal,
+    .secao-perfil,
+    .formulario,
+    .switch-login,
+    .titulo,
+    .coluna,
+    .corpo-filtro,
+    .corpo-detalhes,
+    .conteudo-detalhes,
+    .lista-menu,
+    .grupo-filtro,
+    .grupo-checkbox,
+    .bloco-preco,
+    .opcoes-subnavegacao label,
+    .titulo-subnavegacao,
+    .painel-acessibilidade
+) {
+    background-color: var(--contraste-superficie) !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+body.alto-contraste :is(
+    button,
+    .botao,
+    .item-lista,
+    .botao-menu-config,
+    .botao-aplicar-filtro,
+    .botao-postar,
+    .botao-icone-review,
+    .botao-filtro,
+    .botao-menu,
+    .botao-voltar-nav,
+    .botao-opcoes,
+    .botao-voltar-login,
+    .botao-voltar-cadastro,
+    .botao-voltar-perfil,
+    .tipo-login
+) {
+    background-color: var(--contraste-superficie-elevada) !important;
+    background-image: none !important;
+    border: 1px solid var(--contraste-borda) !important;
+}
+
+body.alto-contraste :is(input, textarea, select, .entrada-busca, .campo-review, .search-input) {
+    background-color: var(--contraste-campo) !important;
+    border: 1px solid var(--contraste-borda) !important;
+}
+
+body.alto-contraste :is(input, textarea, select)::placeholder {
+    color: #d4dfcb !important;
+    opacity: 1;
+}
+
+body.alto-contraste a {
+    color: var(--contraste-destaque) !important;
+    text-decoration: underline !important;
+}
+
+body.alto-contraste :is(input[type="checkbox"], input[type="radio"]) {
+    accent-color: var(--contraste-destaque);
+}
+
+body.alto-contraste :focus-visible {
+    outline: 2px solid var(--contraste-destaque) !important;
+    outline-offset: 3px;
+}
+
+body.alto-contraste .secao-cartoes {
+    padding: 1.5rem;
+    border: 1px solid var(--contraste-borda);
+    border-radius: 24px;
+    background-color: var(--contraste-superficie) !important;
+}
+
+body.alto-contraste .secao-cartoes .cabecalho-cartoes,
+body.alto-contraste .secao-cartoes .cabecalho-cartoes h2 {
+    color: var(--contraste-texto) !important;
+}
+
+body.alto-contraste .secao-cartoes .etiqueta-secao {
+    color: var(--contraste-texto) !important;
+    background-color: var(--contraste-superficie-elevada) !important;
+    border-color: var(--contraste-borda) !important;
+}
+
+body.alto-contraste .secao-cartoes .cards-container .card,
+body.alto-contraste .secao-cartoes .grade-cartoes > .card {
+    border: 1px solid var(--contraste-borda) !important;
+    background-color: var(--contraste-superficie-elevada) !important;
+    box-shadow: none !important;
+}
+
+body.alto-contraste .secao-cartoes .destaque-slide.active {
+    box-shadow: none !important;
+}
+
+body.alto-contraste .secao-cartoes .quadro-imagem-cartao.sem-imagem {
+    background: linear-gradient(135deg, #20382a 0%, #14231a 100%) !important;
+}
+
+body.alto-contraste .secao-cartoes .conteudo-cartao {
+    background-color: var(--contraste-superficie-elevada) !important;
+}
+
+body.alto-contraste .secao-cartoes .botao-favorito {
+    background-color: var(--contraste-campo) !important;
+}
+
+body.alto-contraste .grade-restaurantes-novos {
+    background-color: var(--contraste-campo) !important;
+    border: 1px dashed var(--contraste-borda) !important;
+}
+
+body.alto-contraste .estado-restaurantes-novos {
+    color: var(--contraste-texto) !important;
+}
+
+body.alto-contraste .container-perfil {
+    max-width: 1180px;
+    background-color: var(--contraste-superficie) !important;
+    border: 1px solid var(--contraste-borda);
+    border-radius: 24px;
+    box-shadow: 0 6px 16px rgb(0 0 0 / 16%);
+}
+
+body.alto-contraste .dialog-gerenciar-perfil {
+    background-color: var(--contraste-superficie) !important;
+    border: 1px solid var(--contraste-borda) !important;
+    color: var(--contraste-texto) !important;
+}
+
+body.alto-contraste .botao-gerenciar-perfil {
+    background-color: var(--contraste-superficie-elevada) !important;
+    color: var(--contraste-texto) !important;
+}
+
+body.alto-contraste .dialog-gerenciar-perfil :is(
+    .opcao-gerenciamento,
+    .botao-fechar-dialog
+) {
+    background-color: var(--contraste-superficie-elevada) !important;
+}
+
+body.alto-contraste .dialog-gerenciar-perfil :is(
+    .lista-gerenciamento li,
+    .botao-remover-gerenciamento
+) {
+    background-color: var(--contraste-campo) !important;
+}
+
+body.alto-contraste .dialog-gerenciar-perfil .editar-perfil input {
+    background-color: var(--contraste-campo) !important;
+}
+
+body.alto-contraste .dialog-gerenciar-perfil .botao-salvar-perfil {
+    background-color: var(--contraste-superficie-elevada) !important;
+    color: var(--contraste-texto) !important;
+    border: 1px solid var(--contraste-borda) !important;
+}
+
+body.alto-contraste .container-perfil :is(
+    .card-perfil-usuario,
+    .editar-perfil,
+    .card-stat,
+    .card-review,
+    .historico-container
+) {
+    background-color: var(--contraste-superficie-elevada) !important;
+    border: 1px solid var(--contraste-borda) !important;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 14%) !important;
+}
+
+body.alto-contraste .editar-perfil :is(input[type="text"], input[type="file"]) {
+    background-color: var(--contraste-campo) !important;
+}
+
+body.alto-contraste .editar-perfil .botao-salvar-perfil,
+body.alto-contraste .editar-perfil input[type="file"]::file-selector-button {
+    background-color: var(--contraste-superficie-elevada) !important;
+    color: var(--contraste-texto) !important;
+    border: 1px solid var(--contraste-borda) !important;
+}
+
+body.alto-contraste .container-perfil .item-historico {
+    background-color: var(--contraste-superficie) !important;
+    border: 1px solid var(--contraste-borda) !important;
+}
+
+body.alto-contraste .container-perfil .cabecalho-historico {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+body.alto-contraste .container-perfil .imagem-placeholder {
+    background: linear-gradient(135deg, #294233 0%, #1c3024 100%) !important;
+}
+
+body.alto-contraste .container-perfil .tag-visita {
+    background-color: #3d5a47 !important;
+    color: var(--contraste-texto) !important;
+    border: 1px solid var(--contraste-borda) !important;
+}
+
+body.texto-ampliado :is(
+    h1, h2, h3, h4, h5, h6, p, a, button, label,
+    input, textarea, select, option, li, span, strong,
+    em, small, td, th, legend, figcaption, blockquote, summary
+) {
+    font-size: 1.2em !important;
+    line-height: 1.5;
+}

@@ -6,7 +6,7 @@ export const validate = (schema) => (req, res, next) => {
     return res.status(400).json({
       status: "error",
       message: "Falha na validação dos dados",
-      errors: error.errors
+      errors: error.issues
     });
   }
 };

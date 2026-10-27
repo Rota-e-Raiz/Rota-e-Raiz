@@ -74,7 +74,7 @@ body {
 .tipo-login.ativo {
   background: #a1933f;
   color: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
 
 /* CAMPOS */

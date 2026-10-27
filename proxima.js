@@ -23,6 +23,56 @@ const detalhesEspecialidade = document.getElementById('detalhes-especialidade');
 const botaoAdicionarComentario = document.getElementById('botao-adicionar-comentario');
 const botaoLerHistoria = document.getElementById('botao-ler-historia');
 const comentarioInput = document.getElementById('comentario-input');
+const chaveFavoritos = 'rota-raiz-restaurantes-favoritos';
+
+function lerFavoritos() {
+    try {
+        const favoritos = JSON.parse(localStorage.getItem(chaveFavoritos) || '[]');
+        if (!Array.isArray(favoritos) || favoritos.some(nome => typeof nome !== 'string')) {
+            throw new Error('A lista de restaurantes favoritos está inválida.');
+        }
+        return favoritos;
+    } catch (erro) {
+        console.error('Não foi possível carregar os restaurantes favoritos.', erro);
+        return [];
+    }
+}
+
+function definirEstadoFavorito(botao, ativo, nome) {
+    botao.classList.toggle('favorito-ativo', ativo);
+    botao.setAttribute('aria-pressed', String(ativo));
+    botao.setAttribute('aria-label', ativo
+        ? `Remover ${nome} dos favoritos`
+        : `Adicionar ${nome} aos favoritos`);
+    const icone = botao.querySelector('svg');
+    if (icone) {
+        icone.style.fill = ativo ? '#ff4d4d' : '#f5f1dc';
+    }
+}
+
+function atualizarEstadoFavoritoCard(card, botao) {
+    const nome = card.querySelector('.conteudo-cartao h3, h3')?.textContent?.trim();
+    if (!nome) return;
+    const favorito = lerFavoritos().some(item => item.toLocaleLowerCase('pt-BR') === nome.toLocaleLowerCase('pt-BR'));
+    definirEstadoFavorito(botao, favorito, nome);
+}
+
+function alternarFavorito(card, botao) {
+    const nome = card.querySelector('.conteudo-cartao h3, h3')?.textContent?.trim();
+    if (!nome) return;
+
+    try {
+        const favoritos = lerFavoritos();
+        const existe = favoritos.some(item => item.toLocaleLowerCase('pt-BR') === nome.toLocaleLowerCase('pt-BR'));
+        const atualizados = existe
+            ? favoritos.filter(item => item.toLocaleLowerCase('pt-BR') !== nome.toLocaleLowerCase('pt-BR'))
+            : [...favoritos, nome];
+        localStorage.setItem(chaveFavoritos, JSON.stringify(atualizados));
+        definirEstadoFavorito(botao, !existe, nome);
+    } catch (erro) {
+        console.error('Não foi possível atualizar os restaurantes favoritos.', erro);
+    }
+}
 
 const dadosRestaurantes = {
     'culinária de terreiro': {
@@ -119,8 +169,10 @@ function bindCardDetalhes(card) {
 
     const botaoFavoritoCard = card.querySelector('.botao-favorito');
     if (botaoFavoritoCard) {
+        atualizarEstadoFavoritoCard(card, botaoFavoritoCard);
         botaoFavoritoCard.addEventListener('click', (event) => {
             event.stopPropagation();
+            alternarFavorito(card, botaoFavoritoCard);
         });
     }
 
@@ -362,28 +414,3 @@ if (botaoAdicionarComentario && comentarioInput) {
     render();
     window.addEventListener('resize', render);
 })();
-
-const contraste = document.getElementById('contraste');
-const aumentarFonte = document.getElementById('aumentar-fonte');
-const reduzirAnimacoes = document.getElementById('reduzir-animacoes');
-
-contraste?.addEventListener('change', () => {
-    document.body.classList.toggle(
-        'alto-contraste',
-        contraste.checked
-    );
-});
-
-aumentarFonte?.addEventListener('change', () => {
-    document.body.classList.toggle(
-        'texto-ampliado',
-        aumentarFonte.checked
-    );
-});
-
-reduzirAnimacoes?.addEventListener('change', () => {
-    document.body.classList.toggle(
-        'menos-animacoes',
-        reduzirAnimacoes.checked
-    );
-});

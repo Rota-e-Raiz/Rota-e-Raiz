@@ -16,7 +16,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
     position: relative;
     min-height: 72px;
 }
@@ -62,8 +62,6 @@ body {
     margin-left: auto;
     position: relative;
     z-index: 2;
-    width: auto;
-    height: 54px;
 }
 
 .logo-perfil {
@@ -94,7 +92,7 @@ body {
     border-radius: 28px;
     padding: 25px 18px 24px;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
     min-height: 220px;
     display: flex;
     flex-direction: column;
@@ -130,6 +128,241 @@ body {
     opacity: 0.9;
 }
 
+.botao-gerenciar-perfil {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    padding: 13px 16px;
+    border: 1px solid rgba(61, 90, 71, 0.18);
+    border-radius: 20px;
+    background: #f3ead4;
+    color: #3d5a47;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.botao-gerenciar-perfil:hover {
+    background: #e8ddc3;
+    transform: translateY(-1px);
+}
+
+.editar-perfil {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px 0 0;
+}
+
+.editar-perfil[hidden],
+.painel-gerenciamento[hidden],
+.opcoes-gerenciamento[hidden] {
+    display: none;
+}
+
+.editar-perfil h3 {
+    margin: 0 0 4px;
+    color: #fff;
+    font-size: 1.05rem;
+}
+
+.editar-perfil label {
+    color: #fcf8f1;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.editar-perfil input[type="text"],
+.editar-perfil input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    background: rgba(31, 42, 31, 0.35);
+    color: #fff;
+    font: inherit;
+    font-size: 0.85rem;
+}
+
+.editar-perfil input[type="file"]::file-selector-button {
+    margin-right: 8px;
+    padding: 7px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 9px;
+    background: #d9d2b9;
+    color: #24341f;
+    font: inherit;
+    cursor: pointer;
+}
+
+.botao-salvar-perfil {
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 12px;
+    background: #d9d2b9;
+    color: #24341f;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.botao-salvar-perfil:hover {
+    background: #c9c0a3;
+}
+
+.status-editar-perfil {
+    min-height: 1.2em;
+    margin: 0;
+    color: #fff4dc;
+    font-size: 0.8rem;
+}
+
+.dialog-gerenciar-perfil .editar-perfil label {
+    color: #3d5a47;
+}
+
+.dialog-gerenciar-perfil .status-editar-perfil {
+    color: #3d5a47;
+}
+
+.dialog-gerenciar-perfil {
+    width: min(440px, calc(100vw - 32px));
+    max-height: min(680px, calc(100vh - 40px));
+    margin: auto;
+    padding: 24px;
+    border: 1px solid rgba(61, 90, 71, 0.2);
+    border-radius: 24px;
+    background: #d9d1b7;
+    color: #24341f;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 14px 40px rgba(20, 35, 26, 0.28);
+    overflow-y: auto;
+}
+
+.dialog-gerenciar-perfil::backdrop {
+    background: rgba(15, 26, 19, 0.62);
+    backdrop-filter: blur(3px);
+}
+
+.cabecalho-dialog-perfil {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.cabecalho-dialog-perfil h2 {
+    color: #3d5a47;
+    font-size: 1.25rem;
+}
+
+.botao-fechar-dialog {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: #3d5a47;
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.opcoes-gerenciamento {
+    display: grid;
+    gap: 10px;
+}
+
+.opcao-gerenciamento,
+.botao-voltar-gerenciamento {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid rgba(61, 90, 71, 0.2);
+    border-radius: 14px;
+    background: #3d5a47;
+    color: #fff;
+    font: inherit;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+}
+
+.opcao-gerenciamento:hover,
+.botao-voltar-gerenciamento:hover {
+    background: #304a3a;
+}
+
+.painel-gerenciamento h3 {
+    margin: 18px 0 8px;
+    color: #3d5a47;
+    font-size: 1rem;
+}
+
+.botao-voltar-gerenciamento {
+    width: auto;
+    padding: 8px 12px;
+    background: transparent;
+    color: #3d5a47;
+}
+
+.botao-voltar-gerenciamento:hover {
+    color: #fff;
+}
+
+.mensagem-lista-gerenciamento {
+    margin: 10px 0;
+    color: #425444;
+    font-size: 0.88rem;
+}
+
+.lista-gerenciamento {
+    display: grid;
+    gap: 10px;
+    max-height: 350px;
+    overflow-y: auto;
+    list-style: none;
+}
+
+.lista-gerenciamento li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid rgba(61, 90, 71, 0.18);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.42);
+}
+
+.lista-gerenciamento li span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: #24341f;
+    font-size: 0.88rem;
+}
+
+.botao-remover-gerenciamento {
+    flex-shrink: 0;
+    padding: 7px 10px;
+    border: 1px solid #8a4b3b;
+    border-radius: 10px;
+    background: #fff6eb;
+    color: #7a3428;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.status-postagem {
+    min-height: 1.2em;
+    margin: 6px 0 12px;
+    color: #fff4dc;
+    font-size: 0.82rem;
+}
+
 /* SEÇÃO PRINCIPAL */
 .secao-principal {
     flex: 1;
@@ -154,7 +387,7 @@ body {
     border-radius: 20px;
     padding: 24px 12px 18px;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
     transition: all 0.3s ease;
     min-height: 150px;
     display: flex;
@@ -164,7 +397,7 @@ body {
 
 .card-stat:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
 }
 
 .numero-stat {
@@ -185,7 +418,7 @@ body {
     background: #3d5a47;
     border-radius: 22px;
     padding: 18px 20px 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
     width: 100%;
     max-width: 760px;
 }
@@ -275,7 +508,7 @@ body {
     background: #3d5a47;
     border-radius: 22px;
     padding: 18px 26px 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
     width: 100%;
     max-width: 760px;
 }
@@ -308,7 +541,7 @@ body {
     align-items: center;
     justify-content: center;
     color: #3d5a47;
-    box-shadow: inset 0 0 0 1px rgba(61,90,71,0.15);
+    border: 1px solid rgba(61, 90, 71, 0.2);
 }
 
 .botao-icone-review:hover {
@@ -369,7 +602,7 @@ body {
     background: #fff;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
     transition: all 0.3s ease;
     cursor: pointer;
     min-width: 320px;
@@ -380,7 +613,7 @@ body {
 
 .card-restaurante:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
 }
 
 .img-restaurante {

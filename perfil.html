@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Link para adicionar SVG dos ícones aqui se necessário -->
     <link rel="stylesheet" href="perfil.css">
+    <link rel="stylesheet" href="acessibilidade.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Meu Perfil - Rota & Raiz</title>
 </head>
@@ -29,10 +30,13 @@
                     <img src="frank.jpg" alt="Foto de perfil" class="img-perfil">
                 </div>
                 <div class="info-perfil">
-                    <h2 class="nome-usuario">Frank Ocean</h2>
+                    <h2 class="nome-usuario" id="nome-usuario">Frank Ocean</h2>
                     <p class="usuario-social">@Blonded</p>
                 </div>
             </div>
+            <button class="botao-gerenciar-perfil" id="botao-gerenciar-perfil" type="button" aria-haspopup="dialog">
+                Editar perfil
+            </button>
         </aside>
 
         <main class="secao-principal">
@@ -46,7 +50,7 @@
                     <div class="label-stat">Histórico</div>
                 </div>
                 <div class="card-stat">
-                    <div class="numero-stat">2</div>
+                    <div class="numero-stat" id="quantidade-reviews">0</div>
                     <div class="label-stat">Reviews</div>
                 </div>
             </div>
@@ -54,7 +58,8 @@
             <div class="card-review">
                 <h3 class="titulo-review">Escrever uma review</h3>
 
-                <textarea class="campo-review" placeholder="Escreva sua experiência..."></textarea>
+                <textarea class="campo-review" id="texto-review" placeholder="Escreva sua experiência..."></textarea>
+                <p class="status-postagem" id="status-postagem" role="status" aria-live="polite"></p>
 
                 <div class="container-icones-review">
                     <button class="botao-icone-review" title="Câmera">
@@ -70,7 +75,7 @@
                         </svg>
                     </button>
 
-                    <button class="botao-postar">Postar</button>
+                    <button class="botao-postar" type="button">Postar</button>
                 </div>
             </div>
 
@@ -83,7 +88,7 @@
                     <article class="item-historico sem-imagem">
                         <div class="imagem-placeholder">Rota & Raiz</div>
                         <div class="info-historico">
-                            <h4>Raízes do Recôncavo</h4>
+                            <h4>Culinária de Terreiro</h4>
                             <p>Última visita: 14/08</p>
                         </div>
                         <span class="tag-visita">Visitado</span>
@@ -92,17 +97,17 @@
                     <article class="item-historico sem-imagem">
                         <div class="imagem-placeholder">Rota & Raiz</div>
                         <div class="info-historico">
-                            <h4>Maré de Oxum</h4>
+                            <h4>Fulô</h4>
                             <p>Última visita: 22/08</p>
                         </div>
                         <span class="tag-visita">Visitado</span>
                     </article>
 
                     <article class="item-historico sem-imagem">
-                        <div class="imagem-placeholder">Rota & Raiz</div>
+                        <div class="imagem-placeholder">Rota &amp; Raiz</div>
                         <div class="info-historico">
-                            <h4>Doce Quilombo</h4>
-                            <p>Última visita: 14/08</p>
+                            <h4>Orla</h4>
+                            <p>Última visita: 02/09</p>
                         </div>
                         <span class="tag-visita">Visitado</span>
                     </article>
@@ -111,6 +116,55 @@
         </main>
     </div>
 
+    <dialog class="dialog-gerenciar-perfil" id="dialog-gerenciar-perfil" aria-labelledby="titulo-gerenciar-perfil">
+        <div class="cabecalho-dialog-perfil">
+            <h2 id="titulo-gerenciar-perfil">Opções do perfil</h2>
+            <button class="botao-fechar-dialog" id="botao-fechar-dialog" type="button" aria-label="Fechar">×</button>
+        </div>
+        <nav class="opcoes-gerenciamento" id="opcoes-gerenciamento" aria-label="Opções de gerenciamento">
+            <button class="opcao-gerenciamento" type="button" data-painel="painel-editar-perfil">Editar perfil</button>
+            <button class="opcao-gerenciamento" type="button" data-painel="painel-reviews">Apagar reviews</button>
+            <button class="opcao-gerenciamento" type="button" data-painel="painel-favoritos">Restaurantes favoritos</button>
+        </nav>
+        <section class="painel-gerenciamento" id="painel-editar-perfil" hidden>
+            <button class="botao-voltar-gerenciamento" type="button">← Opções</button>
+            <form class="editar-perfil" id="form-editar-perfil">
+                <label for="editar-nome-usuario">Nome de usuário</label>
+                <input
+                    id="editar-nome-usuario"
+                    name="nome"
+                    type="text"
+                    value="Frank Ocean"
+                    maxlength="40"
+                    autocomplete="name"
+                    required
+                >
+                <label for="editar-foto-perfil">Foto de perfil</label>
+                <input
+                    id="editar-foto-perfil"
+                    name="foto"
+                    type="file"
+                    accept="image/*"
+                >
+                <button class="botao-salvar-perfil" type="submit">Salvar alterações</button>
+                <p class="status-editar-perfil" id="status-editar-perfil" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+        <section class="painel-gerenciamento" id="painel-reviews" hidden>
+            <button class="botao-voltar-gerenciamento" type="button">← Opções</button>
+            <h3>Apagar reviews</h3>
+            <p class="mensagem-lista-gerenciamento" id="mensagem-reviews"></p>
+            <ul class="lista-gerenciamento" id="lista-reviews"></ul>
+        </section>
+        <section class="painel-gerenciamento" id="painel-favoritos" hidden>
+            <button class="botao-voltar-gerenciamento" type="button">← Opções</button>
+            <h3>Restaurantes favoritos</h3>
+            <p class="mensagem-lista-gerenciamento" id="mensagem-favoritos"></p>
+            <ul class="lista-gerenciamento" id="lista-favoritos"></ul>
+        </section>
+    </dialog>
+
     <script src="perfil.js"></script>
+    <script src="acessibilidade.js"></script>
 </body>
 </html>
