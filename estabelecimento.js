@@ -31,7 +31,7 @@ function validateForm() {
 }
 
 const dadosDemo = {
-    nome: 'Sabores da Orla',
+    nome: 'Maré Serena',
     cnpj: '12.345.678/0001-90',
     email: 'sabores.orla@example.com',
     senha: 'senha-demo',

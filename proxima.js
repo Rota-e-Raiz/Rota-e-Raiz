@@ -75,47 +75,47 @@ function alternarFavorito(card, botao) {
 }
 
 const dadosRestaurantes = {
-    'culinária de terreiro': {
+    'raízes de dendê': {
         endereco: 'Rua do Terreiro, 18',
         horario: '12h às 22h',
         especialidade: 'Culinária afro-baiana'
     },
-    'dona mariquita': {
+    'tacho de iaiá': {
         endereco: 'Av. Central, 100',
         horario: '11h às 23h',
         especialidade: 'Cozinha regional'
     },
-    'paraíso tropical': {
+    'quintal dos orixás': {
         endereco: 'Praça das Flores, 44',
         horario: '18h às 00h',
         especialidade: 'Petiscos e frutos do mar'
     },
-    'ki-mukeka': {
+    'moqueca da lua': {
         endereco: 'Travessa da Paz, 9',
         horario: '13h às 21h',
         especialidade: 'Moquecas e peixes'
     },
-    'mocotó café': {
+    'café mandacaru': {
         endereco: 'Rua do Café, 72',
         horario: '08h às 18h',
         especialidade: 'Café e cozinha regional'
     },
-    'fulô': {
+    'flor de mandacaru': {
         endereco: 'Rua da Pedra, 57',
         horario: '17h às 00h',
         especialidade: 'Refeições contemporâneas'
     },
-    'beira mar': {
+    'canto da maré': {
         endereco: 'Av. Beira-Mar, 205',
         horario: '10h às 22h',
         especialidade: 'Frutos do mar e praia'
     },
-    'sabores locais': {
+    'tempero do cacau': {
         endereco: 'Rua das Pedras, 12',
         horario: '12h às 21h',
         especialidade: 'Sabores baianos'
     },
-    'orla': {
+    'maré serena': {
         endereco: 'Orla de Salvador, 210',
         horario: '09h às 23h',
         especialidade: 'Cozinha costeira'
