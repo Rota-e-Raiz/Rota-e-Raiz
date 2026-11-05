@@ -247,6 +247,30 @@ const botaoAnteriorCartoes = document.querySelector('.botao-anterior-cartoes');
 const botaoProximoCartoes = document.querySelector('.botao-proximo-cartoes');
 const gradeCartoes = document.getElementById('grade-restaurantes');
 const gradeRestaurantesNovos = document.getElementById('grade-restaurantes-novos');
+const imagensRestaurantes = {
+    'raízes de dendê': 'imagem restaurantes/raizes-de-dende.jpg',
+    'tacho de iaiá': 'imagem restaurantes/tacho-de-iaia.jpg',
+    'maré serena': 'imagem restaurantes/mare-serena.jpg',
+    'flor de mandacaru': 'imagem restaurantes/flor-de-mandacaru.jpg',
+    'canto da maré': 'imagem restaurantes/canto-da-mare.jpg',
+    'tempero do cacau': 'imagem restaurantes/tempero-do-cacau.jpg',
+    'quintal dos orixás': 'imagem restaurantes/quintal-dos-orixas.jpg',
+    'moqueca da lua': 'imagem restaurantes/moqueca-da-lua.jpg',
+    'café mandacaru': 'imagem restaurantes/cafe-mandacaru.jpg'
+};
+
+document.querySelectorAll('.quadro-imagem-cartao.sem-imagem').forEach((quadro) => {
+    const nomeRestaurante = quadro.closest('.card')?.querySelector('h3')?.textContent?.trim();
+    const caminhoImagem = imagensRestaurantes[nomeRestaurante?.toLocaleLowerCase('pt-BR')];
+    if (!caminhoImagem) return;
+
+    const imagem = document.createElement('img');
+    imagem.className = 'imagem-cartao';
+    imagem.src = caminhoImagem;
+    imagem.alt = nomeRestaurante;
+    quadro.classList.remove('sem-imagem');
+    quadro.prepend(imagem);
+});
 
 let indiceExtraVisivel = 0;
 
