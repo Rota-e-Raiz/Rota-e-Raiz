@@ -17,15 +17,13 @@
         <div class="container-barra">
             <div class="logo-barra">
                 <img src="logo perfil.svg" alt="Rota Raiz" class="logo-icon">
-
             </div>
 
             <div class="busca-barra">
-                <input type="text" placeholder="Qual restaurante hoje?" class="entrada-busca">
-                <button class="botao-busca">
+                <input type="search" id="pesquisa-restaurante" placeholder="Qual restaurante hoje?" class="entrada-busca" aria-label="Pesquisar restaurantes" autocomplete="off">
+                <button class="botao-busca" type="button" aria-label="Pesquisar">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path
-                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
                     </svg>
                 </button>
             </div>
@@ -35,14 +33,13 @@
                 <button class="botao-voltar-nav" onclick="window.location.href='index.html'">Voltar</button>
                 <button class="botao-opcoes" id="botao-abrir-lista" aria-label="Opções">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-</svg>
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                    </svg>
                 </button>
             </div>
-
         </div>
-
     </nav>
+
     <section class="subnavegacao">
         <div class="container-subnavegacao">
             <div class="titulo-subnavegacao">Localidades</div>
@@ -56,6 +53,9 @@
             </div>
         </div>
     </section>
+
+    <p class="mensagem-pesquisa" id="mensagem-pesquisa" role="status" aria-live="polite" hidden></p>
+
     <section class="secao-cartoes">
         <div class="cabecalho-cartoes">
             <div>
@@ -66,6 +66,7 @@
 
         <div class="destaque-viewport">
             <div class="grade-cartoes fileira-destaque destaque-track cards-container" id="cardsContainer">
+
                 <article class="card destaque-slide">
                     <div class="quadro-imagem-cartao sem-imagem">
                         <button class="botao-favorito" aria-label="Favorito">
@@ -107,6 +108,7 @@
                         <p>Uma experiência à beira-mar com sabores locais, clima leve e identidade baiana.</p>
                     </div>
                 </article>
+
             </div>
         </div>
     </section>
@@ -125,132 +127,127 @@
             </button>
         </div>
 
-    <div class="carrossel-restaurantes">
-        <button class="botao-anterior-cartoes" aria-label="Voltar restaurantes">←</button>
-        <div class="grade-cartoes" id="grade-restaurantes">
-            <article class="card">
-                <div class="quadro-imagem-cartao sem-imagem">
-                    <button class="botao-favorito" aria-label="Favorito">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
-                            <path
-                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="conteudo-cartao">
-                    <h3>Raízes de Dendê</h3>
-                    <p>Restaurante voltado à tradição afro-baiana, inspirado nas comidas de terreiro do candomblé, com pratos cheios de história, ancestralidade e sabores típicos da Bahia.</p>
-                </div>
-            </article>
+        <div class="carrossel-restaurantes">
+            <button class="botao-anterior-cartoes" aria-label="Voltar restaurantes">←</button>
 
-            <article class="card">
-                <div class="quadro-imagem-cartao sem-imagem">
-                    <button class="botao-favorito" aria-label="Favorito">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
-                            <path
-                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="conteudo-cartao">
-                    <h3>Flor de Mandacaru</h3>
-                    <p>Restaurante com ambiente acolhedor e proposta regional contemporânea, valorizando ingredientes nordestinos e a cultura baiana em pratos criativos.</p>
-                </div>
-            </article>
+            <div class="grade-cartoes" id="grade-restaurantes">
 
-            <article class="card">
-                <div class="quadro-imagem-cartao sem-imagem">
-                    <button class="botao-favorito" aria-label="Favorito">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
-                            <path
-                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="conteudo-cartao">
-                    <h3>Canto da Maré</h3>
-                    <p>Restaurante tradicional da Bahia, com alimentos ligados a frutos do mar, moquecas e clima praiano “pé na areia.”</p>
-                </div>
-            </article>
+                <article class="card">
+                    <div class="quadro-imagem-cartao sem-imagem">
+                        <button class="botao-favorito" aria-label="Favorito">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="conteudo-cartao">
+                        <h3>Raízes de Dendê</h3>
+                        <p>Restaurante voltado à tradição afro-baiana, inspirado nas comidas de terreiro do candomblé, com pratos cheios de história, ancestralidade e sabores típicos da Bahia.</p>
+                    </div>
+                </article>
 
-            <article class="card">
-                <div class="quadro-imagem-cartao sem-imagem">
-                    <button class="botao-favorito" aria-label="Favorito">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
-                            <path
-                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="conteudo-cartao">
-                    <h3>Tempero do Cacau</h3>
-                    <p>Conceito gastronômico focado na culinária regional baiana, destacando temperos típicos, receitas tradicionais e ingredientes locais.</p>
-                </div>
-            </article>
+                <article class="card">
+                    <div class="quadro-imagem-cartao sem-imagem">
+                        <button class="botao-favorito" aria-label="Favorito">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="conteudo-cartao">
+                        <h3>Flor de Mandacaru</h3>
+                        <p>Restaurante com ambiente acolhedor e proposta regional contemporânea, valorizando ingredientes nordestinos e a cultura baiana em pratos criativos.</p>
+                    </div>
+                </article>
 
-            <article class="card card-extra oculto">
-                <div class="quadro-imagem-cartao sem-imagem">
-                    <button class="botao-favorito" aria-label="Favorito">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
-                            <path
-                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="conteudo-cartao">
-                    <h3>Tacho de Iaiá</h3>
-                    <p>Um dos restaurantes culturais mais famosos de Salvador, reconhecido por preservar receitas afro-baianas e pratos históricos do Recôncavo.</p>
-                </div>
-            </article>
+                <article class="card">
+                    <div class="quadro-imagem-cartao sem-imagem">
+                        <button class="botao-favorito" aria-label="Favorito">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="conteudo-cartao">
+                        <h3>Canto da Maré</h3>
+                        <p>Restaurante tradicional da Bahia, com alimentos ligados a frutos do mar, moquecas e clima praiano “pé na areia.”</p>
+                    </div>
+                </article>
 
-            <article class="card card-extra oculto">
-                <div class="quadro-imagem-cartao sem-imagem">
-                    <button class="botao-favorito" aria-label="Favorito">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
-                            <path
-                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="conteudo-cartao">
-                    <h3>Quintal dos Orixás</h3>
-                    <p>Restaurante icônico que mistura culinária baiana contemporânea com ingredientes exóticos brasileiros e forte identidade cultural.</p>
-                </div>
-            </article>
+                <article class="card">
+                    <div class="quadro-imagem-cartao sem-imagem">
+                        <button class="botao-favorito" aria-label="Favorito">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="conteudo-cartao">
+                        <h3>Tempero do Cacau</h3>
+                        <p>Conceito gastronômico focado na culinária regional baiana, destacando temperos típicos, receitas tradicionais e ingredientes locais.</p>
+                    </div>
+                </article>
 
-            <article class="card card-extra oculto">
-                <div class="quadro-imagem-cartao sem-imagem">
-                    <button class="botao-favorito" aria-label="Favorito">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
-                            <path
-                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="conteudo-cartao">
-                    <h3>Moqueca da Lua</h3>
-                    <p>Referência em moquecas e frutos do mar em Salvador, famoso pelo sabor marcante e pela experiência típica baiana.</p>
-                </div>
-            </article>
+                <article class="card card-extra oculto">
+                    <div class="quadro-imagem-cartao sem-imagem">
+                        <button class="botao-favorito" aria-label="Favorito">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="conteudo-cartao">
+                        <h3>Tacho de Iaiá</h3>
+                        <p>Um dos restaurantes culturais mais famosos de Salvador, reconhecido por preservar receitas afro-baianas e pratos históricos do Recôncavo.</p>
+                    </div>
+                </article>
 
-            <article class="card card-extra oculto">
-                <div class="quadro-imagem-cartao sem-imagem">
-                    <button class="botao-favorito" aria-label="Favorito">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
-                            <path
-                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="conteudo-cartao">
-                    <h3>Café Mandacaru</h3>
-                    <p>Restaurante/café da Chapada Diamantina que une culinária regional, ambiente artístico e elementos da cultura sertaneja baiana.</p>
-                </div>
-            </article>
+                <article class="card card-extra oculto">
+                    <div class="quadro-imagem-cartao sem-imagem">
+                        <button class="botao-favorito" aria-label="Favorito">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="conteudo-cartao">
+                        <h3>Quintal dos Orixás</h3>
+                        <p>Restaurante icônico que mistura culinária baiana contemporânea com ingredientes exóticos brasileiros e forte identidade cultural.</p>
+                    </div>
+                </article>
 
+                <article class="card card-extra oculto">
+                    <div class="quadro-imagem-cartao sem-imagem">
+                        <button class="botao-favorito" aria-label="Favorito">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="conteudo-cartao">
+                        <h3>Moqueca da Lua</h3>
+                        <p>Referência em moquecas e frutos do mar em Salvador, famoso pelo sabor marcante e pela experiência típica baiana.</p>
+                    </div>
+                </article>
+
+                <article class="card card-extra oculto">
+                    <div class="quadro-imagem-cartao sem-imagem">
+                        <button class="botao-favorito" aria-label="Favorito">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF4D4D">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="conteudo-cartao">
+                        <h3>Café Mandacaru</h3>
+                        <p>Restaurante/café da Chapada Diamantina que une culinária regional, ambiente artístico e elementos da cultura sertaneja baiana.</p>
+                    </div>
+                </article>
+
+            </div>
+
+            <button class="botao-proximo-cartoes" aria-label="Ver mais restaurantes">→</button>
         </div>
-        <button class="botao-proximo-cartoes" aria-label="Ver mais restaurantes">→</button>
-    </div>
     </section>
 
     <section class="secao-cartoes secao-restaurantes-novos" id="secao-restaurantes-novos">
@@ -266,7 +263,7 @@
         </div>
     </section>
 
-    <!-- ==================== PAINEL DE FILTROS ==================== -->
+    <!-- PAINEL DE FILTROS -->
     <div class="barra-filtro" id="barra-filtro">
         <div class="cabecalho-filtro">
             <h3>Filtros</h3>
@@ -326,6 +323,7 @@
                 <label class="titulo-filtro">Ações rápidas</label>
                 <div class="lista-menu">
                     <button type="button" class="item-lista" onclick="window.location.href='perfil.html'">Sua conta</button>
+
                     <div class="grupo-filtro">
                         <label class="titulo-filtro">Acessibilidade</label>
                         <div class="lista-menu acessibilidade-menu">
@@ -334,6 +332,7 @@
                                 <i class="bi bi-circle-half" aria-hidden="true"></i>
                                 Modo Escuro
                             </label>
+
                             <label class="opcao-acessibilidade">
                                 <input type="checkbox" id="aumentar-fonte">
                                 <i class="bi bi-type" aria-hidden="true"></i>
@@ -345,7 +344,8 @@
             </div>
         </div>
     </div>
-<!-- ============================ PAINEL DE DETALHES ==================== -->
+
+    <!-- PAINEL DE DETALHES -->
     <div class="barra-detalhes" id="barra-detalhes">
         <div class="cabecalho-detalhes">
             <h3 id="detalhes-titulo">Detalhes do restaurante</h3>
@@ -356,18 +356,33 @@
             <div class="imagem-detalhes">
                 <img id="detalhes-imagem" src="" alt="Imagem do restaurante">
             </div>
+
             <div class="conteudo-detalhes">
                 <p id="detalhes-descricao"></p>
-                <div class="detalhe-item"><strong>Endereço:</strong> <span id="detalhes-endereco">Rua Principal, 123</span></div>
-                <div class="detalhe-item"><strong>Horário:</strong> <span id="detalhes-horario">11h às 23h</span></div>
-                <div class="detalhe-item"><strong>Especialidade:</strong> <span id="detalhes-especialidade">Cozinha regional</span></div>
+
+                <div class="detalhe-item">
+                    <strong>Endereço:</strong>
+                    <span id="detalhes-endereco">Rua Principal, 123</span>
+                </div>
+
+                <div class="detalhe-item">
+                    <strong>Horário:</strong>
+                    <span id="detalhes-horario">11h às 23h</span>
+                </div>
+
+                <div class="detalhe-item">
+                    <strong>Especialidade:</strong>
+                    <span id="detalhes-especialidade">Cozinha regional</span>
+                </div>
+
                 <button class="botao-cta-detalhes" id="botao-ler-historia">Ler sua história</button>
+
                 <div class="box-comentario">
                     <label for="comentario-input">Escreva um comentário</label>
                     <textarea id="comentario-input" rows="4" placeholder="Conte sobre sua experiência..."></textarea>
                 </div>
-                <div class="acoes-detalhes">
-                </div>
+
+                <div class="acoes-detalhes"></div>
             </div>
         </div>
     </div>
