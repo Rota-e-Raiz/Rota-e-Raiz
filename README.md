@@ -1,41 +1,26 @@
-Rota & Raiz:
+# Rota & Raiz
 
-Este Trabalho de Conclusão de Curso propõe o Rota & Raiz, uma plataforma de gastronomia histórica voltada para a valorização da cultura de Camaçari. 
-O projeto investiga a relação entre a culinária e a identidade local, mapeando restaurantes representativos da região. Além disso, busca oferecer uma
-experiência digital informativa e intuitiva, contribuindo para a preservação cultural e o fortalecimento do turismo e da economia local.
+## API MVC de usuários (dados em memória)
 
-Tecnologias utilizadas nesse projeto:
+Para executar a API de demonstração sem conectar ao banco de dados:
 
-HTML
+1. Copie `.env.example` para `.env` (a configuração local `PORT=3000` é suficiente para esta API).
+2. Execute `npm install` e depois `npm run dev` (ou `npm start`).
+3. Envie um `POST` para `http://localhost:3000/api/usuarios` com um corpo JSON, por exemplo `{"nome":"Ana","email":"ana@email.com"}`.
+4. Consulte `http://localhost:3000/api/usuarios` com `GET` para listar os usuários cadastrados.
 
-CSS
+O controller mantém os dados somente na memória: eles são perdidos quando o servidor é reiniciado. A aplicação completa integrada ao MySQL continua disponível em `npm run dev:database` ou `npm run start:database`.
 
-JAVASCRIPT
+## Executar com MySQL local
 
-VISUAL STUDIO CODE
+1. Instale o Node.js e inicie o serviço MySQL do computador.
+2. No CMD, na pasta do projeto, copie `.env.example` para `.env` se ainda não existir.
+3. Configure `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD` e `DB_NAME` no `.env`. Defina também `SESSION_SECRET` com uma chave aleatória de pelo menos 32 caracteres. Não compartilhe nem envie o `.env`.
+4. Execute `npm install`, `npm run migrate` e depois `npm run start:database`.
+5. Acesse `http://localhost:3000`. Para conferir o histórico, execute `npm run migrate:status`.
 
-BOOTSTRAP
+O esquema é mantido em arquivos SQL versionados dentro de `migrations/`. O runner cria `rr_migrations`, registra o checksum e horário de cada arquivo aplicado, serializa execuções concorrentes e rejeita alterações em migrações já aplicadas. O servidor também aplica migrações pendentes antes de começar a atender. A migração inicial usa `CREATE TABLE IF NOT EXISTS` e insere os restaurantes de demonstração sem substituir registros editados; tabelas antigas não são apagadas.
 
+Endpoints principais: `/api/health`, `/api/auth/register`, `/api/auth/register-restaurante`, `/api/auth/login`, `/api/restaurantes`, `/api/destaques`, comentários e curtidas. A sessão usa cookie HttpOnly assinado; senhas são armazenadas com hash.
 
-Nosso projeto:
-
-Este projeto une tecnologia, história e gastronomia para valorizar a cultura de Camaçari. A plataforma promove o desenvolvimento socioeconômico ao 
-conectar moradores e turistas ao patrimônio local. Além de divulgar informações culturais, fortalece a identidade regional e o ecossistema cultural 
-da cidade. O portal foi desenvolvido para oferecer uma experiência prática e acessível. Sua interface responsiva garante uma navegação eficiente em 
-computadores, tablets e smartphones. Recursos como carregamento dinâmico de imagens e feedback visual tornam a interação mais rápida e intuitiva.
-
-Funcionalidades principais:
-
-O projeto busca aproximar moradores e turistas de Camaçari por meio da gastronomia, destacando restaurantes que representam a cultura local e baiana. 
-A plataforma conta com funcionalidades como cadastro, login, perfil de usuário, catálogo de restaurantes e área de configurações. Seu público-alvo 
-inclui turistas, moradores interessados em novas experiências gastronômicas e estabelecimentos que desejam ampliar sua visibilidade.
-Melhorias futuras:
-Como evolução do projeto, pretende-se implementar um banco de dados integrado e desenvolver a estrutura de back-end da plataforma. Essas melhorias
-permitirão o armazenamento e gerenciamento eficiente das informações, além de tornar funcionalidades como a barra de pesquisa e os filtros de 
-restaurantes totalmente operacionais, proporcionando uma experiência mais dinâmica, personalizada e eficiente para os usuários. 
-
-Conclusão:
-
-O projeto demonstra como a integração entre tecnologia, história e gastronomia pode fortalecer a identidade cultural e impulsionar o desenvolvimento
-socioeconômico de Camaçari. A plataforma oferece uma experiência acessível e intuitiva para moradores, turistas e restaurantes locais. Com futuras
-melhorias no back-end e banco de dados, o sistema poderá se tornar ainda mais completo, dinâmico e eficiente. 
+As solicitações de destaque e seus pagamentos ficam `pendentes`. Ainda não há integração com um provedor, portanto nenhuma cobrança é realizada e nenhum dado de cartão é coletado. Destaques só aparecem no carrossel após confirmação e ativação no banco.

@@ -64,6 +64,23 @@
           <input id="localizacao" name="endereco" type="text" placeholder="Endereço do restaurante" required />
         </div>
 
+        <div class="campo">
+          <label for="bairroRestaurante">Bairro</label>
+          <select id="bairroRestaurante" name="localidade" required>
+            <option value="Centro">Centro</option>
+            <option value="Inocoop">Inocoop</option>
+            <option value="Bairro dos 46">Bairro dos 46</option>
+            <option value="Bomba">Bomba</option>
+            <option value="Limoeiro">Limoeiro</option>
+            <option value="Orla de Camaçari">Orla de Camaçari</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="precoMedio">Preço médio por pessoa (R$)</label>
+          <input id="precoMedio" name="precoMedio" type="number" min="1" max="250" step="1" placeholder="Ex.: 50" required />
+        </div>
+
 
       </div>
 
@@ -86,6 +103,15 @@
           <label>Telefone para contato</label>
           <input id="telefone" name="telefone" type="text" placeholder="(71) 1234-5678" required />
         </div>
+
+        <fieldset class="campo campo-ambientes">
+          <legend>Ambientes e comodidades</legend>
+          <label><input type="checkbox" name="ambientes" value="Aberto"> Aberto</label>
+          <label><input type="checkbox" name="ambientes" value="Fechado"> Fechado</label>
+          <label><input type="checkbox" name="ambientes" value="Com música"> Com música</label>
+          <label><input type="checkbox" name="ambientes" value="Área kids"> Área kids</label>
+          <span id="ambientesMensagem" role="status" aria-live="polite"></span>
+        </fieldset>
 
         <div class="campo">
           <label for="imagemRestaurante">Imagem do restaurante</label>

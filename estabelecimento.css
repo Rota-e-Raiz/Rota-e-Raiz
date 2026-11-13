@@ -86,6 +86,44 @@ body {
   font-weight: 400;
 }
 
+.campo-ambientes {
+  min-width: 0;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid rgba(245, 241, 220, 0.35);
+  border-radius: 16px;
+}
+
+.campo-ambientes legend {
+  padding: 0 6px;
+  color: #f6f1d5;
+  font-size: 1rem;
+}
+
+.campo-ambientes label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 5px 12px 5px 0;
+}
+
+.campo.campo-ambientes input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  accent-color: #a1933f;
+}
+
+.campo-ambientes span {
+  display: block;
+  color: #f6f1d5;
+  font-size: 0.8rem;
+}
+
 .campo input,
 .campo select,
 .campo textarea {

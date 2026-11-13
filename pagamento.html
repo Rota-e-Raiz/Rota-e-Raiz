@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1f2a1f">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="pagamento.css">
+    <link rel="stylesheet" href="acessibilidade.css">
+    <title>Comprar destaque - Rota &amp; Raiz</title>
+</head>
+<body>
+    <main class="pagina-pagamento">
+        <header class="cabecalho-pagamento">
+            <a class="marca" href="proxima.html" aria-label="Rota &amp; Raiz - página inicial">
+                <img src="logo com nome PNG (2).png" alt="Rota &amp; Raiz — Descubra os novos sabores em Camaçari">
+            </a>
+            <button class="botao-menu" id="botao-menu" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-pagamento">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="menu-pagamento" id="menu-pagamento" aria-label="Navegação" hidden>
+                <a href="proxima.html">Voltar aos restaurantes</a>
+                <a href="estabelecimento.html">Cadastrar restaurante</a>
+            </nav>
+        </header>
+
+        <section class="introducao" aria-labelledby="titulo-pagina">
+            <h1 id="titulo-pagina">Comprar Destaque no Carrossel</h1>
+            <p>Apareça no topo do nosso carrossel principal para milhares de clientes em Camaçari.</p>
+        </section>
+
+        <form id="form-pagamento" novalidate>
+            <fieldset class="selecao-plano">
+                <legend>1. Escolha a Posição no Carrossel:</legend>
+                <div class="planos">
+                    <label class="cartao-plano">
+                        <input type="radio" name="plano" value="100" required>
+                        <span class="plano-conteudo">
+                            <span class="etiqueta-plano">Mais visto</span>
+                            <strong>Posição 1</strong>
+                            <span class="descricao-plano">Topo absoluto no site</span>
+                            <span class="divisor-plano"></span>
+                            <span class="preco-plano"><strong>R$ 100</strong> / mês</span>
+                            <span class="seletor-plano"><span></span> Selecionar esse plano</span>
+                        </span>
+                    </label>
+                    <label class="cartao-plano">
+                        <input type="radio" name="plano" value="75">
+                        <span class="plano-conteudo">
+                            <span class="etiqueta-plano">Popular</span>
+                            <strong>Posição 2 e 3</strong>
+                            <span class="descricao-plano">Alta visibilidade</span>
+                            <span class="divisor-plano"></span>
+                            <span class="preco-plano"><strong>R$ 75</strong> / mês</span>
+                            <span class="seletor-plano"><span></span> Selecionar esse plano</span>
+                        </span>
+                    </label>
+                    <label class="cartao-plano">
+                        <input type="radio" name="plano" value="50">
+                        <span class="plano-conteudo">
+                            <span class="etiqueta-plano">Básico</span>
+                            <strong>Posições 4 a 6</strong>
+                            <span class="descricao-plano">Destaque padrão</span>
+                            <span class="divisor-plano"></span>
+                            <span class="preco-plano"><strong>R$ 50</strong> / mês</span>
+                            <span class="seletor-plano"><span></span> Selecionar esse plano</span>
+                        </span>
+                    </label>
+                </div>
+                <p class="erro-campo" id="erro-plano" aria-live="polite"></p>
+            </fieldset>
+
+            <section class="dados-restaurante" aria-labelledby="titulo-restaurante">
+                <h2 id="titulo-restaurante">2. Dados do Restaurante:</h2>
+                <label class="campo-restaurante">
+                    <span class="visualmente-oculto">Nome do restaurante</span>
+                    <input type="text" name="restaurante" placeholder="Nome do restaurante*" autocomplete="organization" required>
+                </label>
+                <label class="campo-restaurante">
+                    <span class="visualmente-oculto">CNPJ ou CPF do responsável</span>
+                    <input type="text" id="documento" name="documento" placeholder="CNPJ ou CPF do responsável*" inputmode="numeric" autocomplete="off" maxlength="18" required>
+                </label>
+                <div class="campo-imagem-restaurante">
+                    <label for="imagem-restaurante">Imagem do restaurante*</label>
+                    <input type="file" id="imagem-restaurante" name="imagem-restaurante" accept="image/jpeg,image/png,image/webp" aria-describedby="ajuda-imagem">
+                    <span class="ajuda-imagem" id="ajuda-imagem">Envie uma imagem JPG, PNG ou WEBP de até 8 MB. Seu restaurante precisa estar cadastrado e você deve entrar com a conta dele.</span>
+                    <img class="previa-imagem-restaurante" id="previa-imagem-restaurante" alt="Prévia da imagem do restaurante" hidden>
+                </div>
+            </section>
+
+            <section class="dados-pagamento" aria-labelledby="titulo-pagamento">
+                <h2 id="titulo-pagamento">3. Pagamento:</h2>
+                <div class="linha-divisoria"></div>
+                <p class="aviso-demonstracao">A solicitação será registrada como pendente. Nenhuma cobrança será feita até a integração de um provedor de pagamentos.</p>
+                <button class="botao-ativar" type="submit">Solicitar destaque</button>
+                <p class="mensagem-formulario" id="mensagem-formulario" role="status" aria-live="polite"></p>
+                <a class="link-carrossel" id="link-carrossel" href="proxima.html#destaques" hidden>Ver restaurantes em destaque</a>
+            </section>
+        </form>
+    </main>
+    <script src="pagamento.js"></script>
+    <script src="acessibilidade.js"></script>
+</body>
+</html>

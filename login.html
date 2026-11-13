@@ -75,23 +75,7 @@
     </form>
   </section>
 
-  <script>
-    const botoesTipoLogin = document.querySelectorAll('.tipo-login');
-    const formularios = document.querySelectorAll('.form-login');
-
-    botoesTipoLogin.forEach(botao => {
-      botao.addEventListener('click', () => {
-        const tipo = botao.dataset.tipo;
-
-        botoesTipoLogin.forEach(item => item.classList.toggle('ativo', item === botao));
-        formularios.forEach(formulario => {
-          const ativo = formulario.id === `${tipo}LoginForm`;
-          formulario.classList.toggle('ativo', ativo);
-          formulario.style.display = ativo ? 'flex' : 'none';
-        });
-      });
-    });
-  </script>
+  <script src="login.js"></script>
   <script src="acessibilidade.js"></script>
 
 </body>
