@@ -22,7 +22,8 @@ Interface responsiva para computadores, tablets e smartphones.
 Carregamento dinâmico de imagens.
 Feedback visual para melhorar a interação.
 Navegação intuitiva e acessível.
-🛠️ Tecnologias utilizadas
+
+Tecnologias utilizadas
 
 As seguintes tecnologias e ferramentas foram utilizadas no desenvolvimento do projeto:
 
