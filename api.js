@@ -33,7 +33,7 @@ const restaurantSchema = z.object({
         .optional().default('')
 });
 const highlightSchema = z.object({
-    plano: z.enum(['100', '75', '50'])
+    plano: z.enum(['100', '70', '50'])
 });
 const commentSchema = z.object({
     texto: z.string().trim().min(2).max(2000)
@@ -263,7 +263,7 @@ api.get('/destaques', async (request, response) => {
 api.post('/destaques', requireAuth, requireRole('restaurante'), parseBody(highlightSchema), async (request, response) => {
     const planos = {
         100: { plano: 'mais_visto', posicao: 1 },
-        75: { plano: 'popular', posicao: 2 },
+        70: { plano: 'popular', posicao: 2 },
         50: { plano: 'basico', posicao: 4 }
     };
     const valor = Number(request.validatedBody.plano);
@@ -376,6 +376,19 @@ api.get('/meus-restaurantes', requireAuth, requireRole('restaurante'), async (re
         [request.user.id]
     );
     response.json({ restaurantes: rows.map(normalizeRestaurant) });
+});
+
+api.delete('/restaurantes/:id', requireAuth, requireRole('restaurante'), async (request, response) => {
+    const [result] = await pool.execute(
+        'DELETE FROM rr_restaurantes WHERE id = ? AND usuario_id = ?',
+        [request.params.id, request.user.id]
+    );
+
+    if (result.affectedRows === 0) {
+        return response.status(404).json({ message: 'Restaurante não encontrado.' });
+    }
+
+    response.status(204).send();
 });
 
 api.use((request, response) => {

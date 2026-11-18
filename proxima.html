@@ -328,14 +328,16 @@
                 <div class="lista-menu">
                     <button type="button" class="item-lista" onclick="window.location.href='perfil.html'">Sua conta</button>
                     <button type="button" class="item-lista" onclick="window.location.href='pagamento.html'">Anunciar restaurante</button>
-                    <button type="button" class="item-lista" onclick="window.location.href='configuracoes.html'">Configurações</button>
+                    <button type="button" class="item-lista item-lista-perigo" id="botao-apagar-destaque">Apagar destaque</button>
+                    <button type="button" class="item-lista item-lista-perigo" id="botao-apagar-restaurante-criado">Apagar restaurante criado</button>
+                    <p class="status-acoes-lista" id="status-acoes-lista" role="status" aria-live="polite"></p>
                     <div class="grupo-filtro">
                         <label class="titulo-filtro">Acessibilidade</label>
                         <div class="lista-menu acessibilidade-menu">
                             <label class="opcao-acessibilidade">
                                 <input type="checkbox" id="contraste">
                                 <i class="bi bi-circle-half" aria-hidden="true"></i>
-                                Modo Escuro
+                                Alto contraste
                             </label>
                             <label class="opcao-acessibilidade">
                                 <input type="checkbox" id="aumentar-fonte">

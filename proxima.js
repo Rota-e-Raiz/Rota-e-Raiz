@@ -358,16 +358,22 @@ function criarSeloDestaque(card, plano) {
     card.querySelector('.selo-destaque')?.remove();
 
     const configuracao = {
-        '100': { classe: 'destaque-ouro', texto: 'Destaque Ouro' },
+        '100': { classe: 'destaque-ouro', texto: 'Destaque Ouro', imagem: 'unnamed.webp' },
         '70': { classe: 'destaque-top-mes', texto: 'Top do mês' },
         '50': { classe: 'destaque-recomendado', texto: 'Recomendado' }
     }[plano];
     if (!configuracao) return;
 
     card.classList.add(configuracao.classe);
-    const selo = document.createElement('span');
+    const selo = document.createElement(configuracao.imagem ? 'img' : 'span');
     selo.className = 'selo-destaque';
-    selo.textContent = configuracao.texto;
+    if (configuracao.imagem) {
+        selo.src = configuracao.imagem;
+        selo.alt = configuracao.texto;
+        selo.classList.add('selo-destaque-ouro');
+    } else {
+        selo.textContent = configuracao.texto;
+    }
     card.querySelector('.quadro-imagem-cartao')?.prepend(selo);
 }
 
@@ -888,3 +894,53 @@ async function carregarComentarios(restauranteId) {
     render();
     window.addEventListener('resize', render);
 })();
+
+    const botaoApagarDestaque = document.getElementById('botao-apagar-destaque');
+    const botaoApagarRestauranteCriado = document.getElementById('botao-apagar-restaurante-criado');
+    const statusAcoesLista = document.getElementById('status-acoes-lista');
+
+    if (botaoApagarDestaque) {
+        botaoApagarDestaque.addEventListener('click', () => {
+            if (!window.confirm('Deseja apagar o destaque criado?')) return;
+
+            localStorage.removeItem(chaveDestaqueSelecionado);
+            configurarDestaqueSelecionado();
+            window.dispatchEvent(new Event('destaque-selecionado-atualizado'));
+            if (statusAcoesLista) statusAcoesLista.textContent = 'Destaque apagado.';
+        });
+    }
+
+    if (botaoApagarRestauranteCriado) {
+        botaoApagarRestauranteCriado.addEventListener('click', async () => {
+            if (!window.confirm('Deseja apagar o restaurante criado?')) return;
+
+            localStorage.removeItem('rotaRaizRestaurantes');
+
+            try {
+                const resposta = await fetch('/api/meus-restaurantes', { credentials: 'same-origin' });
+                if (!resposta.ok) {
+                    if (resposta.status === 401 || resposta.status === 403) {
+                        if (statusAcoesLista) statusAcoesLista.textContent = 'Faça login como restaurante para apagar pelo sistema.';
+                        await carregarRestaurantesDoBanco();
+                        return;
+                    }
+                    throw new Error('Não foi possível localizar os restaurantes criados.');
+                }
+
+                const { restaurantes } = await resposta.json();
+                for (const restaurante of restaurantes) {
+                    const exclusao = await fetch(`/api/restaurantes/${restaurante.id}`, {
+                        method: 'DELETE',
+                        credentials: 'same-origin'
+                    });
+                    if (!exclusao.ok) throw new Error('Não foi possível apagar o restaurante.');
+                }
+
+                await carregarRestaurantesDoBanco();
+                if (statusAcoesLista) statusAcoesLista.textContent = 'Restaurante criado apagado.';
+            } catch (error) {
+                console.error(error);
+                if (statusAcoesLista) statusAcoesLista.textContent = 'Não foi possível apagar o restaurante.';
+            }
+        });
+    }
