@@ -22,13 +22,12 @@
             </button>
             <nav class="menu-pagamento" id="menu-pagamento" aria-label="Navegação" hidden>
                 <a href="proxima.html">Voltar aos restaurantes</a>
-                <a href="estabelecimento.html">Cadastrar restaurante</a>
             </nav>
         </header>
 
         <section class="introducao" aria-labelledby="titulo-pagina">
             <h1 id="titulo-pagina">Comprar Destaque no Carrossel</h1>
-            <p>Apareça no topo do nosso carrossel principal para milhares de clientes em Camaçari.</p>
+            <p>Experimente os destaques da Rota &amp; Raiz sem criar conta e sem cobrança real.</p>
         </section>
 
         <form id="form-pagamento" novalidate>
@@ -36,33 +35,44 @@
                 <legend>1. Escolha a Posição no Carrossel:</legend>
                 <div class="planos">
                     <label class="cartao-plano">
-                        <input type="radio" name="plano" value="100" required>
+                        <input type="radio" name="plano" value="100" required checked>
                         <span class="plano-conteudo">
-                            <span class="etiqueta-plano">Mais visto</span>
+                            <span class="etiqueta-plano">Destaque Ouro</span>
                             <strong>Posição 1</strong>
-                            <span class="descricao-plano">Topo absoluto no site</span>
+                            <span class="lista-beneficios-plano">
+                                <span>Ajuda da plataforma com publicidade e seleção das fotos pela IA</span>
+                                <span>Post exclusivo no Instagram</span>
+                                <span>Selo físico em parceria com a Rota e Raiz</span>
+                            </span>
                             <span class="divisor-plano"></span>
                             <span class="preco-plano"><strong>R$ 100</strong> / mês</span>
                             <span class="seletor-plano"><span></span> Selecionar esse plano</span>
                         </span>
                     </label>
                     <label class="cartao-plano">
-                        <input type="radio" name="plano" value="75">
+                        <input type="radio" name="plano" value="70">
                         <span class="plano-conteudo">
-                            <span class="etiqueta-plano">Popular</span>
-                            <strong>Posição 2 e 3</strong>
-                            <span class="descricao-plano">Alta visibilidade</span>
+                            <span class="etiqueta-plano">Top do mês</span>
+                            <strong>Posições 2 e 3</strong>
+                            <span class="lista-beneficios-plano">
+                                <span>Destaque em posições privilegiadas no carrossel</span>
+                                <span>Selo físico em parceria com a Rota e Raiz</span>
+                            </span>
                             <span class="divisor-plano"></span>
-                            <span class="preco-plano"><strong>R$ 75</strong> / mês</span>
+                            <span class="preco-plano"><strong>R$ 70</strong> / mês</span>
                             <span class="seletor-plano"><span></span> Selecionar esse plano</span>
                         </span>
                     </label>
                     <label class="cartao-plano">
                         <input type="radio" name="plano" value="50">
                         <span class="plano-conteudo">
-                            <span class="etiqueta-plano">Básico</span>
+                            <span class="etiqueta-plano">Recomendado</span>
                             <strong>Posições 4 a 6</strong>
-                            <span class="descricao-plano">Destaque padrão</span>
+                            <span class="lista-beneficios-plano">
+                                <span>Destaque recomendado no carrossel</span>
+                                <span>Selo físico em parceria com a Rota e Raiz</span>
+                                <span>O mais visitado/comentado do ano recebe certificado físico e digital de Melhor do Ano</span>
+                            </span>
                             <span class="divisor-plano"></span>
                             <span class="preco-plano"><strong>R$ 50</strong> / mês</span>
                             <span class="seletor-plano"><span></span> Selecionar esse plano</span>
@@ -76,16 +86,16 @@
                 <h2 id="titulo-restaurante">2. Dados do Restaurante:</h2>
                 <label class="campo-restaurante">
                     <span class="visualmente-oculto">Nome do restaurante</span>
-                    <input type="text" name="restaurante" placeholder="Nome do restaurante*" autocomplete="organization" required>
+                    <input type="text" name="restaurante" placeholder="Nome do restaurante*" autocomplete="organization" maxlength="160" required>
                 </label>
                 <label class="campo-restaurante">
-                    <span class="visualmente-oculto">CNPJ ou CPF do responsável</span>
-                    <input type="text" id="documento" name="documento" placeholder="CNPJ ou CPF do responsável*" inputmode="numeric" autocomplete="off" maxlength="18" required>
+                    <span class="visualmente-oculto">CPF do responsável</span>
+                    <input type="text" name="cpf" placeholder="CPF para demonstração*" inputmode="numeric" maxlength="14" required>
                 </label>
                 <div class="campo-imagem-restaurante">
                     <label for="imagem-restaurante">Imagem do restaurante*</label>
-                    <input type="file" id="imagem-restaurante" name="imagem-restaurante" accept="image/jpeg,image/png,image/webp" aria-describedby="ajuda-imagem">
-                    <span class="ajuda-imagem" id="ajuda-imagem">Envie uma imagem JPG, PNG ou WEBP de até 8 MB. Seu restaurante precisa estar cadastrado e você deve entrar com a conta dele.</span>
+                    <input type="file" id="imagem-restaurante" name="imagem-restaurante" accept="image/jpeg,image/png,image/webp" aria-describedby="ajuda-imagem" required>
+                    <span class="ajuda-imagem" id="ajuda-imagem">Informe qualquer CPF para demonstração e envie uma imagem JPG, PNG ou WEBP de até 8 MB. Não precisa criar conta nem cadastrar o restaurante.</span>
                     <img class="previa-imagem-restaurante" id="previa-imagem-restaurante" alt="Prévia da imagem do restaurante" hidden>
                 </div>
             </section>
@@ -93,12 +103,19 @@
             <section class="dados-pagamento" aria-labelledby="titulo-pagamento">
                 <h2 id="titulo-pagamento">3. Pagamento:</h2>
                 <div class="linha-divisoria"></div>
-                <p class="aviso-demonstracao">A solicitação será registrada como pendente. Nenhuma cobrança será feita até a integração de um provedor de pagamentos.</p>
-                <button class="botao-ativar" type="submit">Solicitar destaque</button>
+                <p class="aviso-demonstracao">Confirme a solicitação para simular o pagamento e ativar a prévia do destaque.</p>
+                <button class="botao-ativar" type="submit">Solicitar pagamento</button>
                 <p class="mensagem-formulario" id="mensagem-formulario" role="status" aria-live="polite"></p>
                 <a class="link-carrossel" id="link-carrossel" href="proxima.html#destaques" hidden>Ver restaurantes em destaque</a>
             </section>
         </form>
+        <div class="notificacao-pagamento" id="notificacao-pagamento" role="status" aria-live="polite" aria-atomic="true" hidden>
+            <span class="icone-sucesso-pagamento" aria-hidden="true">✓</span>
+            <div>
+                <strong>Pagamento efetuado</strong>
+                <span>Pagamento simulado. Nenhum valor foi cobrado.</span>
+            </div>
+        </div>
     </main>
     <script src="pagamento.js"></script>
     <script src="acessibilidade.js"></script>

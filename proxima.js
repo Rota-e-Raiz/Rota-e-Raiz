@@ -322,6 +322,7 @@ const botaoProximoCartoes = document.querySelector('.botao-proximo-cartoes');
 const gradeCartoes = document.getElementById('grade-restaurantes');
 const gradeRestaurantesNovos = document.getElementById('grade-restaurantes-novos');
 const cardsContainer = document.getElementById('cardsContainer');
+const chaveDestaqueSelecionado = 'rota-raiz-destaque-selecionado';
 const imagensRestaurantes = {
     'raízes de dendê': 'imagem restaurantes/raizes-de-dende.jpg',
     'tacho de iaiá': 'imagem restaurantes/tacho-de-iaia.jpg',
@@ -333,6 +334,106 @@ const imagensRestaurantes = {
     'moqueca da lua': 'imagem restaurantes/moqueca-da-lua.jpg',
     'café mandacaru': 'imagem restaurantes/cafe-mandacaru.jpg'
 };
+
+function lerDestaqueSelecionado() {
+    try {
+        const destaque = JSON.parse(localStorage.getItem(chaveDestaqueSelecionado) || 'null');
+        if (!destaque?.nome || !['100', '70', '50'].includes(String(destaque.plano))) {
+            return null;
+        }
+        return {
+            nome: String(destaque.nome),
+            cpf: typeof destaque.cpf === 'string' ? destaque.cpf : '',
+            plano: String(destaque.plano),
+            imagem: typeof destaque.imagem === 'string' ? destaque.imagem : ''
+        };
+    } catch (error) {
+        console.error('Não foi possível carregar o destaque selecionado.', error);
+        return null;
+    }
+}
+
+function criarSeloDestaque(card, plano) {
+    card.classList.remove('destaque-ouro', 'destaque-top-mes', 'destaque-recomendado');
+    card.querySelector('.selo-destaque')?.remove();
+
+    const configuracao = {
+        '100': { classe: 'destaque-ouro', texto: 'Destaque Ouro' },
+        '70': { classe: 'destaque-top-mes', texto: 'Top do mês' },
+        '50': { classe: 'destaque-recomendado', texto: 'Recomendado' }
+    }[plano];
+    if (!configuracao) return;
+
+    card.classList.add(configuracao.classe);
+    const selo = document.createElement('span');
+    selo.className = 'selo-destaque';
+    selo.textContent = configuracao.texto;
+    card.querySelector('.quadro-imagem-cartao')?.prepend(selo);
+}
+
+function configurarDestaqueSelecionado() {
+    if (!cardsContainer) return;
+
+    document.querySelectorAll('[data-destaque-selecionado="true"]').forEach(card => {
+        card.classList.remove('destaque-ouro', 'destaque-top-mes', 'destaque-recomendado');
+        card.querySelector('.selo-destaque')?.remove();
+        delete card.dataset.destaqueSelecionado;
+        if (card.dataset.destaquePrototipo === 'true') card.remove();
+    });
+
+    const destaque = lerDestaqueSelecionado();
+    if (!destaque) {
+        window.dispatchEvent(new Event('destaque-selecionado-atualizado'));
+        return;
+    }
+
+    const nomeSelecionado = normalizarTextoFiltro(destaque.nome);
+    let cardSelecionado = null;
+
+    document.querySelectorAll('#grade-restaurantes .card, #grade-restaurantes-novos .card').forEach(card => {
+        const titulo = card.querySelector('h3')?.textContent?.trim();
+        if (titulo && normalizarTextoFiltro(titulo) === nomeSelecionado) {
+            cardSelecionado = card;
+            criarSeloDestaque(card, destaque.plano);
+            card.dataset.destaqueSelecionado = 'true';
+        }
+    });
+
+    const destaqueExistente = Array.from(cardsContainer.querySelectorAll('.card')).find(card => {
+        const titulo = card.querySelector('h3')?.textContent?.trim();
+        return titulo && normalizarTextoFiltro(titulo) === nomeSelecionado;
+    });
+    if (destaqueExistente) {
+        criarSeloDestaque(destaqueExistente, destaque.plano);
+        destaqueExistente.dataset.destaqueSelecionado = 'true';
+        window.dispatchEvent(new Event('destaque-selecionado-atualizado'));
+        return;
+    }
+
+    const cardCarrossel = cardSelecionado
+        ? cardSelecionado.cloneNode(true)
+        : criarCardDestaque({
+            nome: destaque.nome,
+            historia: 'Restaurante em destaque na Rota & Raiz.',
+            imagem: destaque.imagem
+        });
+    cardCarrossel.className = 'card destaque-slide';
+    cardCarrossel.removeAttribute('style');
+    delete cardCarrossel.dataset.bindDetalhes;
+    cardCarrossel.dataset.destaqueSelecionado = 'true';
+    cardCarrossel.dataset.destaquePrototipo = 'true';
+    criarSeloDestaque(cardCarrossel, destaque.plano);
+    bindCardDetalhes(cardCarrossel);
+
+    const indice = destaque.plano === '100' ? 0 : destaque.plano === '70' ? 1 : 3;
+    const filhos = Array.from(cardsContainer.children);
+    if (filhos[indice]) {
+        cardsContainer.insertBefore(cardCarrossel, filhos[indice]);
+    } else {
+        cardsContainer.append(cardCarrossel);
+    }
+    window.dispatchEvent(new Event('destaque-selecionado-atualizado'));
+}
 
 document.querySelectorAll('.quadro-imagem-cartao.sem-imagem').forEach((quadro) => {
     const nomeRestaurante = quadro.closest('.card')?.querySelector('h3')?.textContent?.trim();
@@ -390,7 +491,7 @@ if (botaoProximoCartoes && gradeCartoes) {
 function criarCardDestaque(restaurante) {
     const card = document.createElement('article');
     card.className = 'card destaque-slide';
-    card.dataset.id = String(restaurante.id);
+    if (restaurante.id) card.dataset.id = String(restaurante.id);
     card.dataset.endereco = restaurante.endereco || '';
     card.dataset.horario = restaurante.horario || '';
     card.dataset.especialidade = restaurante.especialidade || '';
@@ -432,6 +533,7 @@ async function carregarDestaquesDoBanco() {
         if (destaques.length) {
             cardsContainer.replaceChildren(...destaques.map(criarCardDestaque));
         }
+        configurarDestaqueSelecionado();
     } catch (error) {
         console.error('Não foi possível carregar os destaques pagos.', error);
     }
@@ -551,9 +653,8 @@ async function carregarRestaurantesDoBanco() {
             especialidade: restaurante.especialidade
         })));
         await carregarRestaurantesNovos(restaurantes);
+        configurarDestaqueSelecionado();
         aplicarFiltrosRestaurantes();
-        carregarRestaurantesDoBanco();
-        carregarDestaquesDoBanco();
     } catch (error) {
         console.error('Não foi possível carregar os dados do restaurante.', error);
         const aviso = document.createElement('p');
@@ -650,6 +751,13 @@ botaoLimparFiltro.addEventListener('click', () => {
 });
 
 aplicarFiltrosRestaurantes();
+configurarDestaqueSelecionado();
+window.addEventListener('pageshow', configurarDestaqueSelecionado);
+window.addEventListener('storage', event => {
+    if (event.key === chaveDestaqueSelecionado) configurarDestaqueSelecionado();
+});
+carregarRestaurantesDoBanco();
+carregarDestaquesDoBanco();
 
 if (botaoFecharDetalhes) {
     botaoFecharDetalhes.addEventListener('click', closePanels);
@@ -739,6 +847,12 @@ async function carregarComentarios(restauranteId) {
     let index = 0;
     let paused = false;
 
+    function selecionarDestaqueCriado() {
+        const cardsVisiveis = Array.from(container.querySelectorAll('.card:not(.oculto-filtro)'));
+        const indiceSelecionado = cardsVisiveis.findIndex(card => card.dataset.destaqueSelecionado === 'true');
+        if (indiceSelecionado >= 0) index = indiceSelecionado;
+    }
+
     function render() {
         const cardsVisiveis = Array.from(container.querySelectorAll('.card:not(.oculto-filtro)'));
         const indiceAtivo = cardsVisiveis.length ? index % cardsVisiveis.length : -1;
@@ -761,11 +875,16 @@ async function carregarComentarios(restauranteId) {
     viewport?.addEventListener('mouseleave', () => { paused = false; });
     viewport?.addEventListener('focusin', () => { paused = true; });
     viewport?.addEventListener('focusout', () => { paused = false; });
+    window.addEventListener('destaque-selecionado-atualizado', () => {
+        selecionarDestaqueCriado();
+        render();
+    });
 
     window.setInterval(() => {
         if (!paused && document.visibilityState === 'visible') move(1);
-    }, 5000);
+    }, 4500);
 
+    selecionarDestaqueCriado();
     render();
     window.addEventListener('resize', render);
 })();

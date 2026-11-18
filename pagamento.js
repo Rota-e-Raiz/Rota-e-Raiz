@@ -1,45 +1,20 @@
 const formPagamento = document.getElementById('form-pagamento');
 const menuPagamento = document.getElementById('menu-pagamento');
 const botaoMenu = document.getElementById('botao-menu');
-const documento = document.getElementById('documento');
 const imagemRestaurante = document.getElementById('imagem-restaurante');
 const previaImagemRestaurante = document.getElementById('previa-imagem-restaurante');
 const mensagemFormulario = document.getElementById('mensagem-formulario');
 const erroPlano = document.getElementById('erro-plano');
 const linkCarrossel = document.getElementById('link-carrossel');
 const botaoAtivar = formPagamento.querySelector('.botao-ativar');
+const notificacaoPagamento = document.getElementById('notificacao-pagamento');
 let urlPreviaImagem;
-let imagemSalva = '';
-
-function apenasDigitos(valor) {
-    return valor.replace(/\D/g, '');
-}
-
-async function lerResposta(response) {
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(result.message || 'Não foi possível concluir a solicitação.');
-    return result;
-}
 
 botaoMenu.addEventListener('click', () => {
     const aberto = botaoMenu.getAttribute('aria-expanded') === 'true';
     botaoMenu.setAttribute('aria-expanded', String(!aberto));
     botaoMenu.setAttribute('aria-label', aberto ? 'Abrir menu' : 'Fechar menu');
     menuPagamento.hidden = aberto;
-});
-
-documento.addEventListener('input', () => {
-    const digitos = apenasDigitos(documento.value).slice(0, 14);
-    documento.value = digitos.length <= 11
-        ? digitos
-            .replace(/(\d{3})(\d)/, '$1.$2')
-            .replace(/(\d{3})(\d)/, '$1.$2')
-            .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
-        : digitos
-            .replace(/^(\d{2})(\d)/, '$1.$2')
-            .replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3')
-            .replace(/\.(\d{3})(\d)/, '.$1/$2')
-            .replace(/(\d{4})(\d)/, '$1-$2');
 });
 
 imagemRestaurante.addEventListener('change', () => {
@@ -100,42 +75,6 @@ function converterImagemParaArmazenamento(arquivo) {
     });
 }
 
-async function carregarContaRestaurante() {
-    try {
-        const response = await fetch('/api/auth/me', { credentials: 'same-origin' });
-        if (response.status === 401) {
-            window.location.href = 'login.html?redirect=pagamento.html';
-            return;
-        }
-        const { usuario } = await lerResposta(response);
-        if (usuario.tipo !== 'restaurante') {
-            mensagemFormulario.textContent = 'Entre com uma conta de restaurante para solicitar o destaque.';
-            botaoAtivar.disabled = true;
-            return;
-        }
-
-        const respostaRestaurante = await fetch('/api/meus-restaurantes', { credentials: 'same-origin' });
-        const { restaurantes } = await lerResposta(respostaRestaurante);
-        const restaurante = restaurantes[0];
-        if (!restaurante) {
-            mensagemFormulario.textContent = 'Cadastre os dados do restaurante antes de solicitar um destaque.';
-            botaoAtivar.disabled = true;
-            return;
-        }
-        formPagamento.elements.restaurante.value = restaurante.nome;
-        documento.value = restaurante.cnpj || '';
-        if (restaurante.imagem) {
-            imagemSalva = restaurante.imagem;
-            previaImagemRestaurante.src = restaurante.imagem;
-            previaImagemRestaurante.hidden = false;
-        }
-    } catch (error) {
-        console.error('Não foi possível validar a conta do restaurante.', error);
-        mensagemFormulario.textContent = error.message || 'Não foi possível conectar ao servidor.';
-        botaoAtivar.disabled = true;
-    }
-}
-
 formPagamento.addEventListener('submit', async event => {
     event.preventDefault();
     mensagemFormulario.textContent = '';
@@ -150,52 +89,35 @@ formPagamento.addEventListener('submit', async event => {
     }
     if (!formPagamento.reportValidity()) return;
 
-    const numeroDocumento = apenasDigitos(documento.value);
-    if (![11, 14].includes(numeroDocumento.length)) {
-        documento.setCustomValidity('Informe um CPF ou CNPJ válido.');
-        documento.reportValidity();
-        documento.addEventListener('input', () => documento.setCustomValidity(''), { once: true });
-        return;
-    }
-
     const arquivoImagem = imagemRestaurante.files[0];
-    if (!arquivoImagem && !imagemSalva) {
+    if (!arquivoImagem) {
         imagemRestaurante.setCustomValidity('Envie uma imagem do restaurante.');
         imagemRestaurante.reportValidity();
         return;
     }
 
     botaoAtivar.disabled = true;
-    mensagemFormulario.textContent = 'Salvando a solicitação...';
+    botaoAtivar.textContent = 'Processando pagamento...';
+    mensagemFormulario.textContent = 'Aguarde enquanto confirmamos o pagamento.';
     try {
-        const imagem = arquivoImagem
-            ? await converterImagemParaArmazenamento(arquivoImagem)
-            : imagemSalva;
-        await lerResposta(await fetch('/api/me/restaurante/destaque', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'same-origin',
-            body: JSON.stringify({
-                nome: formPagamento.elements.restaurante.value.trim(),
-                cnpj: documento.value.trim(),
-                imagem
-            })
+        const imagem = arquivoImagem ? await converterImagemParaArmazenamento(arquivoImagem) : '';
+        localStorage.setItem('rota-raiz-destaque-selecionado', JSON.stringify({
+            nome: formPagamento.elements.restaurante.value.trim(),
+            cpf: formPagamento.elements.cpf.value.trim(),
+            plano: planoSelecionado.value,
+            imagem
         }));
-        imagemSalva = imagem;
-        const result = await lerResposta(await fetch('/api/destaques', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'same-origin',
-            body: JSON.stringify({ plano: planoSelecionado.value })
-        }));
-        mensagemFormulario.textContent = result.message;
-        botaoAtivar.textContent = 'Solicitação registrada';
+        mensagemFormulario.textContent = 'Pagamento confirmado.';
+        botaoAtivar.textContent = 'Pagamento efetuado';
         linkCarrossel.hidden = false;
+        await new Promise(resolve => window.setTimeout(resolve, 3000));
+        notificacaoPagamento.hidden = false;
+        window.setTimeout(() => {
+            window.location.href = 'proxima.html#destaques';
+        }, 1200);
     } catch (error) {
         console.error('Não foi possível solicitar o destaque.', error);
         mensagemFormulario.textContent = error.message || 'Não foi possível conectar ao servidor.';
         botaoAtivar.disabled = false;
     }
 });
-
-carregarContaRestaurante();

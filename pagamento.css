@@ -161,15 +161,27 @@ body {
 
 .plano-conteudo {
     display: flex;
-    min-height: 205px;
+    min-height: 280px;
     flex-direction: column;
     align-items: flex-start;
     padding: 17px;
-    border: 1.5px solid var(--dourado);
+    border: 2px solid #c0c4c2;
     border-radius: 17px;
     background: var(--verde);
     color: #f5f1dc;
     transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.cartao-plano:nth-child(1) .plano-conteudo {
+    border-color: #d5b93f;
+}
+
+.cartao-plano:nth-child(2) .plano-conteudo {
+    border-color: #bfc7c4;
+}
+
+.cartao-plano:nth-child(3) .plano-conteudo {
+    border-color: #6f776a;
 }
 
 .cartao-plano:hover .plano-conteudo {
@@ -188,7 +200,7 @@ body {
 
 .etiqueta-plano {
     display: inline-block;
-    min-width: 88px;
+    min-width: 108px;
     margin-bottom: 9px;
     padding: 6px 12px;
     border-radius: 20px;
@@ -198,6 +210,19 @@ body {
     font-weight: 700;
     text-align: center;
     text-transform: uppercase;
+}
+
+.cartao-plano:nth-child(1) .etiqueta-plano {
+    background: #d5b93f;
+}
+
+.cartao-plano:nth-child(2) .etiqueta-plano {
+    background: #c4cbc8;
+}
+
+.cartao-plano:nth-child(3) .etiqueta-plano {
+    background: #6f776a;
+    color: #fff;
 }
 
 .plano-conteudo > strong {
@@ -211,6 +236,28 @@ body {
     color: #c8c8bc;
     font-size: 12px;
     line-height: 1.35;
+}
+
+.lista-beneficios-plano {
+    display: grid;
+    gap: 6px;
+    margin: 10px 5px 0;
+    color: #d9dccf;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.lista-beneficios-plano span {
+    position: relative;
+    padding-left: 13px;
+}
+
+.lista-beneficios-plano span::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #d5c36a;
+    font-weight: 700;
 }
 
 .divisor-plano {
@@ -436,6 +483,66 @@ body {
     text-decoration: underline;
 }
 
+.notificacao-pagamento {
+    position: fixed;
+    z-index: 1000;
+    right: 24px;
+    bottom: 24px;
+    display: flex;
+    width: min(360px, calc(100% - 32px));
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    border: 2px solid #d5c36a;
+    border-radius: 16px;
+    background: #1f2a1f;
+    color: #f5f1dc;
+    box-shadow: 0 12px 30px rgba(31, 42, 31, 0.28);
+    animation: aparecer-notificacao-pagamento 220ms ease-out;
+}
+
+.notificacao-pagamento[hidden] {
+    display: none;
+}
+
+.notificacao-pagamento div {
+    display: grid;
+    gap: 2px;
+}
+
+.notificacao-pagamento strong {
+    color: #d5c36a;
+    font-size: 15px;
+}
+
+.notificacao-pagamento div span {
+    font-size: 12px;
+}
+
+.icone-sucesso-pagamento {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    place-items: center;
+    border-radius: 50%;
+    background: #d5c36a;
+    color: #1f2a1f;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+@keyframes aparecer-notificacao-pagamento {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .visualmente-oculto {
     position: absolute;
     width: 1px;
@@ -461,7 +568,7 @@ body {
     }
 
     .plano-conteudo {
-        min-height: 205px;
+        min-height: 280px;
         padding: 17px;
     }
 
