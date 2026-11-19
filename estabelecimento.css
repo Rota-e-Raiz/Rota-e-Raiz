@@ -1,0 +1,247 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url("orlaimage.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  padding: 30px;
+}
+
+/* CARD */
+
+.container {
+  width: 100%;
+  max-width: 1050px;
+
+  background: rgba(42, 58, 27, 0.88);
+
+  border-radius: 45px;
+
+  padding: 40px 70px;
+
+  backdrop-filter: blur(4px);
+}
+
+/* TÍTULO */
+
+.titulo {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.titulo h1 {
+  color: #f5f1dc;
+  font-size: 2.3rem;
+  font-weight: 500;
+}
+
+.titulo span {
+  color: #f5f1dc;
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+/* FORMULÁRIO */
+
+.formulario {
+  display: flex;
+  gap: 50px;
+}
+
+.coluna {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* CAMPOS */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.campo label {
+  color: #f6f1d5;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.campo-ambientes {
+  min-width: 0;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid rgba(245, 241, 220, 0.35);
+  border-radius: 16px;
+}
+
+.campo-ambientes legend {
+  padding: 0 6px;
+  color: #f6f1d5;
+  font-size: 1rem;
+}
+
+.campo-ambientes label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 5px 12px 5px 0;
+}
+
+.campo.campo-ambientes input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  accent-color: #a1933f;
+}
+
+.campo-ambientes span {
+  display: block;
+  color: #f6f1d5;
+  font-size: 0.8rem;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  background-color: #a1933f;
+
+  color: #f5f5f5;
+
+  padding: 15px 18px;
+
+  border-radius: 16px;
+
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+}
+
+.campo input[type="file"] {
+  padding: 11px 14px;
+  cursor: pointer;
+}
+
+.imagem-preview {
+  width: 100%;
+  max-height: 130px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+/* PLACEHOLDER */
+
+input::placeholder,
+textarea::placeholder {
+  color: #e5ddb0;
+}
+
+/* SELECT */
+
+select {
+  appearance: none;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 8 10 12 14 8'/%3E%3C/svg%3E");
+
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+
+  cursor: pointer;
+}
+
+/* TEXTAREA */
+
+textarea {
+  min-height: 180px;
+  resize: none;
+}
+
+/* BOTÃO VOLTAR */
+
+.botao-voltar-cadastro {
+  margin-bottom: 25px;
+  padding: 10px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.12);
+  color: #f5f1dc;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.botao-voltar-cadastro:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+/* BOTÃO */
+
+.botao {
+  display: block;
+
+  margin: 35px auto 0;
+
+  padding: 12px 50px;
+
+  border-radius: 18px;
+  border: 1px solid #9d8d33;
+
+  background: #243512;
+
+  color: #fff;
+
+  font-size: 1.1rem;
+  font-family: 'Poppins', sans-serif;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.botao:hover {
+  background: #324b18;
+  transform: scale(1.03);
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 900px) {
+
+  .container {
+    padding: 35px;
+  }
+
+  .formulario {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+}
